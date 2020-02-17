@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using project_banhang.Models;
+@{ 
+    DataContext db = new DataContext();
+    var _itemshot = db.ItemsCategories.OrderByDescending(tbl => tbl.id).ToList().Where(tbl=>tbl.hot==true);
+}
+
+<section class="awe-section-2" id="home_block_2">
+    <aside class="adv_bottom">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in _itemshot)
+                {
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="adv_bottom_inner">
+                            <figure class="img_effect img_1">
+                                <a href="/Product/Category/@item.id" title="@item.name">
+                                    <img class="img-responsive center-base" src="~/Upload/Category-Thum/@item.thumnails" data-lazyload="~/Upload/Category-Thum/@item.thumnails" style="height:370px;width:390px;"> @*style="max-height:370px;max-width:390px;"*@
+                                </a>
+                            </figure>
+                        </div>
+                    </div>
+                }
+                @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="adv_bottom_inner">
+                <figure class="img_effect img_100">
+                    <a href="https://www.memoryzone.com.vn/camera-hanh-trinh" title="Camera hành trình Go pro">
+                        <img class="img-responsive center-base" src="./images/banner_2.jpg" data-lazyload="//bizweb.dktcdn.net/100/329/122/themes/681013/assets/banner_2.jpg?1574878515674" alt="Camera hành trình Go pro">
+                    </a>
+                </figure>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="row">
+                <div class="col-lg-12 margin-style">
+                    <div class="img_effect img_100">
+                        <figure class="effect-apollo">
+                            <a href="https://www.memoryzone.com.vn/ram-ddr4-for-desktop" title="Ram máy tính">
+                                <img class="img-responsive center-base" src="./images/banner_3.jpg" data-lazyload="//bizweb.dktcdn.net/100/329/122/themes/681013/assets/banner_3.jpg?1574878515674" alt="Ram máy tính">
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="img_effect img_100">
+                        <figure class="effect-apollo">
+                            <a href="https://www.memoryzone.com.vn/o-cung-di-dong-western" title="Ổ cứng di động WD ">
+                                <img class="img-responsive center-base" src="./images/banner_4.jpg" data-lazyload="//bizweb.dktcdn.net/100/329/122/themes/681013/assets/banner_4.jpg?1574878515674" alt="Ổ cứng di động WD ">
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+            </div>
+        </div>
+    </aside>
+</section>
+<section class="awe-section-3" id="home_block_3">
+    <section class="section_hotdeal">
+        <div class="container">
+            <div class="row">
+                <div class="content_hihi col-lg-12">
+                    <div class="heading_hotdeal">
+                        <h2 class="title-head">
+                            @{ 
+                                DateTime dt = DateTime.Now;
+                                DayOfWeek test = dt.DayOfWeek;
+                                //dt=dt.Date;
+                            }
+                            <a href="/Flash-sale/"></a><a href="/Flash-sale/"><span class="color_main" style="color:red"></span>CYBER <text>@test</text></a>
+                        </h2>
+                    </div>
+
+                    <div class="border_wrap">
+                        <div class="owl_product_comback ">
+                            <div class="product_comeback_wrap">
+                                <div class="owl_product_item_content owl-carousel not-nav2 owl-loaded owl-drag" data-dot="false" data-nav="false" data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="20">
+
+                                    <div class="owl-stage-outer">
+                                        <div class="owl-stage"></div>
+                                    </div>
+                                    <div class="owl-nav disabled">
+                                        <div class="owl-prev"> </div>
+                                        <div class="owl-next"> </div>
+                                    </div>
+                                    <div class="owl-dots disabled"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+

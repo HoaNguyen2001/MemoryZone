@@ -1,0 +1,286 @@
+a{
+    color: #008744;
+}
+
+
+
+a:hover, a:focus {
+    color: #006533;
+}
+
+
+
+
+
+.payment-icon-fa{
+	color: #008744;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.input-radio:checked, .input-checkbox:checked {
+		box-shadow: 0 0 0 10px #008744 inset;
+	}
+
+
+
+	.form-control.field__input:focus {
+		box-shadow: 0 0 0 2px #008744;
+	}
+
+	.form-control:focus {
+		box-shadow: 0 0 0 2px #008744;
+	}
+
+
+
+.btn, .btn-primary{
+	
+    background-color: #008744;
+    border-color: #008744;
+	
+	
+    color: #FFFFFF;
+	
+}
+
+
+
+.btn-primary.disabled {
+    background-color: #3FA572;
+    border-color: #3FA572;
+}
+
+
+
+.btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active{
+    background-color: #006533;
+    border-color: #006533;
+}
+
+
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary{
+    background-color: #006533;
+    border-color: #006533;
+}
+
+
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary, .btn:hover{
+    background-color: #006533;
+    border-color: #006533;
+}
+
+
+
+
+
+
+
+
+.logo__image--small {
+    max-height: 2.14286em;
+}
+
+.logo__image--medium {
+    max-height: 3.28571em;
+}
+
+.logo__image--large {
+    max-height: 4.57143em;
+}
+
+@media (min-width: 1000px) {
+    .logo__image--small {
+        max-height: 3.85714em;
+    }
+
+    .logo__image--medium {
+        max-height: 6.28571em;
+    }
+
+    .logo__image--large {
+        max-height: 8.71429em;
+    }
+}
+
+.logo--center {
+    text-align: center;
+}
+
+.logo--left {
+    text-align: left;
+}
+
+.logo--right {
+    text-align: right;
+}
+
+
+
+
+
+
+body.body--custom-background-color{
+   
+   background-color: #f4f4f4;
+   
+   
+   color: #000000;
+   
+}
+
+ 
+
+    body.body--custom-background-color .section__title{
+	    color: #000000;
+    }
+
+
+body.body--custom-background-image{
+    background:url(//bizweb.dktcdn.net/100/329/122/themes/681013/assets/checkout_body_background_image.jpg?1240215255) center top;
+}
+
+
+
+
+
+
+.footer {
+    
+	
+}
+
+
+@media (min-width: 992px)
+{	
+    .order-summary.order-summary--custom-background-color {
+		
+		
+    }
+
+    .order-summary.order-summary--custom-background-image {
+        background:url(//bizweb.dktcdn.net/100/329/122/themes/681013/assets/checkout_sidebar_background_image.jpg?1240215255) center top;
+    }
+}
+
+
+@media (max-width: 992px)
+{
+	
+    .order-summary.order-summary--custom-background-color:after {
+		
+		
+    }
+    .order-summary.order-summary--custom-background-image:after {
+        background:url(//bizweb.dktcdn.net/100/329/122/themes/681013/assets/checkout_sidebar_background_image.jpg?1240215255) center top;
+    }
+}
+
+.order-summary--custom-background-image.sidebar:after{
+   background:url(//bizweb.dktcdn.net/100/329/122/themes/681013/assets/checkout_sidebar_background_image.jpg?1240215255) center top;
+}
+
+
+.product-thumbnail__quantity {
+    background-color: #008744;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.total-line-price{
+	color: #008744
+}
+
+
+
+
+
+    .product .product-thumbnail__quantity{
+	    color: #FFFFFF;
+    }
+    .input-radio:after{
+        background-color: #FFFFFF;
+    }
+
+
+
+
+
+
+
+	.thankyou-infos .thankyou-message .thankyou-message-text h3{
+		color: #000000
+	}
+
+	.thankyou-infos .customer-info .order-summary-header h2{
+		color: #000000
+	}
+
+	.thankyou-infos .customer-info .order-success .print-link, .thankyou-infos .customer-info .order-success .print-link .icon-print{
+		color: #000000
+	}
+
+
+
+	.thankyou-infos .thankyou-message .thankyou-message-text p{
+		color: #595959
+	}
+
+	.thankyou-infos .customer-info .summary-section p{
+		color: #595959
+	}
+
+	.thankyou-infos .customer-info .summary-section span{
+		color: #595959
+	}
+
+
+
+	.thankyou-infos .customer-info .shipping-info{
+		border: 1px solid #F6F6F6;
+	}
+
+
+
+
+
+
+
+.success .applied-discount-status-success{
+	color:#008744;
+}
+
+
+
+
+
+.success .applied-discount-code {
+    color:#008744;
+}

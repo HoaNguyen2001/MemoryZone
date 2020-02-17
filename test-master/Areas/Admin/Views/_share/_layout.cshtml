@@ -1,0 +1,607 @@
+﻿
+@{
+    Layout = null;
+}
+@*@*khai báo để sử dụng các class trong models*@
+@using project_banhang.Models
+@*khai báo kiểu dữ liệu của models*@
+@using System.Text;
+@{
+    //khai báo đối tượng thao tác csdl
+    DataContext db = new DataContext();
+}
+@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://modularcode.io/modular-admin-html/ -->
+<html class="no-js" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> MemoryZone - Admin </title>
+    <link rel="shortcut icon" type="image/png" href="~/images/favicon-16x16.png" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="https://modularcode.io/modular-admin-html/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="~/css/vendor.css">
+    <!-- Theme initialization -->
+    <!-- link awsomware -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @* load ckeditor để sử dụng *@
+    <script language="javascript" src="~/Admin/ckeditor/ckeditor.js"></script>
+    <!--boostrap-->
+    <link rel="stylesheet" href="~/js/bootstrap.min.js" />
+    <script async="" src="~/js/analytics.js"></script>
+    <script>
+        var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) : {};
+        var themeName = themeSettings.themeName || '';
+        if (themeName) {
+            document.write('<link rel="stylesheet" id="theme-style" href="css/app-' + themeName + '.css">');
+        } else {
+            document.write('<link rel="stylesheet" id="theme-style" href="css/app.css">');
+        }
+    </script>
+    <link rel="stylesheet" id="theme-style" href="~/css/app.css">
+    <style type="text/css">
+        .jqstooltip {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            visibility: hidden;
+            background: rgb(0, 0, 0) transparent;
+            background-color: rgba(0, 0, 0, 0.6);
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+            white-space: nowrap;
+            padding: 5px;
+            border: 1px solid white;
+            box-sizing: content-box;
+            z-index: 10000;
+        }
+
+        .jqsfield {
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body class="loaded">
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <header class="header">
+                <div class="header-block header-block-collapse d-lg-none d-xl-none">
+                    <button class="collapse-btn" id="sidebar-collapse-btn">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                @*<div class="header-block header-block-search">
+                        <form role="search">
+                            <div class="input-container">
+                                <i class="fa fa-search"></i>
+                                <input type="search" placeholder="Search">
+                                <div class="underline"></div>
+                            </div>
+                        </form>
+                    </div>*@
+                <!-- <div class="header-block header-block-buttons">
+                    <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                    <a href="https://github.com/modularcode/modular-admin-html/stargazers" class="btn btn-sm header-btn">
+                        <i class="fa fa-star"></i>
+                        <span>Star Us</span>
+                    </a>
+                    <a href="https://github.com/modularcode/modular-admin-html/releases" class="btn btn-sm header-btn">
+                        <i class="fa fa-cloud-download"></i>
+                        <span>Download .zip</span>
+                    </a>
+                </div> -->
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+                        @*<li class="notifications new">
+                            <a href="https://modularcode.io/modular-admin-html/" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <sup>
+                                    <span class="counter">8</span>
+                                </sup>
+                            </a>
+                            <div class="dropdown-menu notifications-dropdown-menu">
+                                <ul class="notifications-container">
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/" class="notification-item">
+                                            <div class="img-col">
+                                                <div class="img" style="background-image: url(&#39;assets/faces/3.jpg&#39;)"></div>
+                                            </div>
+                                            <div class="body-col">
+                                                <p>
+                                                    <span class="accent">Zack Alien</span> pushed new commit: <span class="accent">Fix page load performance issue</span>.
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/" class="notification-item">
+                                            <div class="img-col">
+                                                <div class="img" style="background-image: url(&#39;assets/faces/5.jpg&#39;)"></div>
+                                            </div>
+                                            <div class="body-col">
+                                                <p>
+                                                    <span class="accent">Amaya Hatsumi</span> started new task: <span class="accent">Dashboard UI design.</span>.
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/" class="notification-item">
+                                            <div class="img-col">
+                                                <div class="img" style="background-image: url(&#39;assets/faces/8.jpg&#39;)"></div>
+                                            </div>
+                                            <div class="body-col">
+                                                <p>
+                                                    <span class="accent">Andy Nouman</span> deployed new version of <span class="accent">NodeJS REST Api V3</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <footer>
+                                    <ul>
+                                        <li>
+                                            <a href="https://modularcode.io/modular-admin-html/"> View All </a>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </div>
+                        </li>*@
+                        <li class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="https://modularcode.io/modular-admin-html/#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="img" style="background-image: url(&#39;https://avatars3.githubusercontent.com/u/3959008?v=3&amp;s=40&#39;)">
+                                </div>
+                                @* nếu email nào đăng nhập thì sẽ hiện tên, làm như đoạn dưới *@
+                            <span class="name">
+                                @{
+                                    DataContext db1 = new DataContext();
+                                    var users = db1.users.OrderByDescending(tbl => tbl.id).ToList();
+                                }
+                                @{
+                                    if (Context.Session.GetString("email") != null)
+                                    {
+                                        foreach (var item in users)
+                                        {
+                                            if (Context.Session.GetString("email") == item.email)
+                                            {
+                                                @item.name
+                                            }
+                                        }
+                                    }
+
+                                }
+                            </span>
+                            </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                @*<a class="dropdown-item" href="https://modularcode.io/modular-admin-html/#">
+                                    <i class="fa fa-user icon"></i> Profile
+                                </a>
+                                <a class="dropdown-item" href="https://modularcode.io/modular-admin-html/#">
+                                    <i class="fa fa-bell icon"></i> Notifications
+                                </a>
+                                <a class="dropdown-item" href="https://modularcode.io/modular-admin-html/#">
+                                    <i class="fa fa-gear icon"></i> Settings
+                                </a>*@
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="~/Admin/logout">
+                                    <i class="fa fa-power-off icon"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <aside class="sidebar">
+                <div class="sidebar-container">
+                    <div class="sidebar-header">
+                        <div class="brand">
+                            <div class="logo">
+                                <span class="l l1"></span>
+                                <span class="l l2"></span>
+                                <span class="l l3"></span>
+                                <span class="l l4"></span>
+                                <span class="l l5"></span>
+                            </div> Modular Admin
+                        </div>
+                    </div>
+                    <nav class="menu">
+                        <ul class="sidebar-menu metismenu" id="sidebar-menu">
+                            <li class="active">
+                                <a href="/Admin/">
+                                    <i class="fa fa-home"></i> Trang chủ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-th-large"></i> Quản lý sản phẩm <i class="fa arrow"></i>
+                                </a>
+                                <ul class="sidebar-nav collapse">
+                                    <li>
+                                        <a href="/Admin/ItemsList/List"> Danh sách sản phẩm @*Danh sách sản phẩm*@</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/ItemsCategories/List"> Danh sách danh mục @*Danh mục*@</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Brand/">Thương hiệu</a>
+                                    </li>
+                                    @*<li>
+                                        <a href="/Admin/ItemsConfiguration/Configuration">Cấu hình sản phẩm</a>
+                                    </li>*@
+                                </ul>
+                            </li>
+                            @*<li>
+                                <a href="#">
+                                    <i class="fa fa-area-chart"></i> Charts <i class="fa arrow"></i>
+                                </a>
+                                <ul class="sidebar-nav collapse">
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/charts-flot.html"> Flot Charts </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/charts-morris.html"> Morris Charts </a>
+                                    </li>
+                                </ul>
+                            </li>*@
+                            <li>
+                                <a href="/Admin/Order/">
+                                    <i class="fa fa-table"></i> Đơn hàng
+                                </a>
+                                @*<ul class="sidebar-nav collapse">
+                                    <i class="fa arrow"></i>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/static-tables.html"> Static Tables </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/responsive-tables.html"> Responsive Tables </a>
+                                    </li>
+                                </ul>*@
+                            </li>
+                            @*<li>
+                                <a href="https://modularcode.io/modular-admin-html/forms.html">
+                                    <i class="fa fa-pencil-square-o"></i> Forms
+                                </a>
+                            </li>*@
+                            @*<li>
+                                <a href="https://modularcode.io/modular-admin-html/">
+                                    <i class="fa fa-desktop"></i> UI Elements <i class="fa arrow"></i>
+                                </a>
+                                <ul class="sidebar-nav collapse">
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/buttons.html"> Buttons </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/cards.html"> Cards </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/typography.html"> Typography </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/icons.html"> Icons </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/grid.html"> Grid </a>
+                                    </li>
+                                </ul>*@
+                            </li>
+                            <li>
+                                <a href="/Admin/Users/List">
+                                    <i class="fa fa-users"></i> User @*<i class="fa arrow"></i>*@
+                                </a>
+                                @*<ul class="sidebar-nav collapse">
+                                    <li>
+                                        <a href="/Admin/Users/List">User</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/reset.html"> Reset </a>
+                                    </li>
+                                </ul>*@
+                            </li>
+                            @*<li>
+                                <a href="https://modularcode.io/modular-admin-html/">
+                                    <i class="fa fa-sitemap"></i> Menu Levels <i class="fa arrow"></i>
+                                </a>
+                                <ul class="sidebar-nav collapse">
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/#">
+                                            Second Level Item <i class="fa arrow"></i>
+                                        </a>
+                                        <ul class="sidebar-nav collapse">
+                                            <li>
+                                                <a href="https://modularcode.io/modular-admin-html/#"> Third Level Item </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://modularcode.io/modular-admin-html/#"> Third Level Item </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/#"> Second Level Item </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://modularcode.io/modular-admin-html/#">
+                                            Second Level Item <i class="fa arrow"></i>
+                                        </a>
+                                        <ul class="sidebar-nav collapse">
+                                            <li>
+                                                <a href="https://modularcode.io/modular-admin-html/#"> Third Level Item </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://modularcode.io/modular-admin-html/#"> Third Level Item </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://modularcode.io/modular-admin-html/#">
+                                                    Third Level Item <i class="fa arrow"></i>
+                                                </a>
+                                                <ul class="sidebar-nav collapse">
+                                                    <li>
+                                                        <a href="https://modularcode.io/modular-admin-html/#"> Fourth Level Item </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="https://modularcode.io/modular-admin-html/#"> Fourth Level Item </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="https://modularcode.io/modular-admin-html/screenful.html">
+                                    <i class="fa fa-bar-chart"></i> Agile Metrics <span class="label label-screenful">by Screenful</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/modularcode/modular-admin-html">
+                                    <i class="fa fa-github-alt"></i> Theme Docs
+                                </a>
+                            </li>*@
+                        </ul>
+                    </nav>
+                </div>
+                <footer class="sidebar-footer">
+                    <ul class="sidebar-menu metismenu" id="customize-menu">
+                        <li>
+                            <ul class="collapse">
+                                <li class="customize">
+                                    <div class="customize-item">
+                                        <div class="row customize-header">
+                                            <div class="col-4">
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="title">fixed</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="title">static</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label class="title">Sidebar:</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>
+                                                    <input class="radio" type="radio" name="sidebarPosition" value="sidebar-fixed">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>
+                                                    <input class="radio" type="radio" name="sidebarPosition" value="">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label class="title">Header:</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>
+                                                    <input class="radio" type="radio" name="headerPosition" value="header-fixed">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>
+                                                    <input class="radio" type="radio" name="headerPosition" value="">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label class="title">Footer:</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>
+                                                    <input class="radio" type="radio" name="footerPosition" value="footer-fixed">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>
+                                                    <input class="radio" type="radio" name="footerPosition" value="">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="customize-item">
+                                        <ul class="customize-colors">
+                                            <li>
+                                                <span class="color-item color-red" data-theme="red"></span>
+                                            </li>
+                                            <li>
+                                                <span class="color-item color-orange" data-theme="orange"></span>
+                                            </li>
+                                            <li>
+                                                <span class="color-item color-green" data-theme=""></span>
+                                            </li>
+                                            <li>
+                                                <span class="color-item color-seagreen" data-theme="seagreen"></span>
+                                            </li>
+                                            <li>
+                                                <span class="color-item color-blue" data-theme="blue"></span>
+                                            </li>
+                                            <li>
+                                                <span class="color-item color-purple" data-theme="purple"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a href="https://modularcode.io/modular-admin-html/">
+                                <i class="fa fa-cog"></i> Customize
+                            </a>
+                        </li>
+                    </ul>
+                </footer>
+            </aside>
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+            <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
+            <div class="mobile-menu-handle"></div>
+            @RenderBody()
+
+            <footer class="footer">
+                <div class="footer-block buttons">
+                    <iframe class="footer-github-btn" src="~/Admin_files/github-btn.html" frameborder="0" scrolling="0" width="140px" height="20px"></iframe>
+                </div>
+                <div class="footer-block author">
+                    <ul>
+                        <li>
+                            created by @*<a href="https://github.com/modularcode">ModularCode</a>*@ Nguyễn Hòa
+                        </li>
+                        <li>
+                            <a href="https://facebook.com/nguyenhoa.dev">more info</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+            <div class="modal fade" id="modal-media">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Media Library</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                        </div>
+                        <div class="modal-body modal-tab-container">
+                            <ul class="nav nav-tabs modal-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://modularcode.io/modular-admin-html/#gallery" data-toggle="tab" role="tab">Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="https://modularcode.io/modular-admin-html/#upload" data-toggle="tab" role="tab">Upload</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content modal-tab-content">
+                                <div class="tab-pane fade" id="gallery" role="tabpanel">
+                                    <div class="images-container">
+                                        <div class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active in" id="upload" role="tabpanel">
+                                    <div class="upload-container">
+                                        <div id="dropzone">
+                                            <form action="https://modularcode.io/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                <div class="dz-message-block">
+                                                    <div class="dz-message needsclick"> Drop files here or click to upload. </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Insert Selected</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <div class="modal fade" id="confirm-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure want to do this?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        </div>
+    </div>
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-80463319-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script src="~/js/vendor.js"></script>
+    <script src="~/js/app.js"></script>
+
+    <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
+    <div class="responsive-bootstrap-toolkit">
+        <div class="device-xs 				  hidden-sm-up"></div>
+        <div class="device-sm hidden-xs-down hidden-md-up"></div>
+        <div class="device-md hidden-sm-down hidden-lg-up"></div>
+        <div class="device-lg hidden-md-down hidden-xl-up"></div>
+        <div class="device-xl hidden-lg-down			  "></div>
+    </div>
+    <div class="jqvmap-label" style="display: none;"></div>
+    <div class="jqvmap-label" style="display: none;"></div>
+</body>
+
+</html>

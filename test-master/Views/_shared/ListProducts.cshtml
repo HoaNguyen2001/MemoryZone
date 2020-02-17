@@ -1,0 +1,1545 @@
+﻿
+@{
+    Layout = null;
+}
+@using project_banhang.Models
+@using System.Linq;
+@{
+    //kkhoiwr tạo đối tượng thao tác csdll
+    DataContext db = new DataContext();
+    //lấy danh sách của itemscategories
+    var itemscategories = db.ItemsCategories.OrderByDescending(tbl => tbl.name).ToList();
+    var itemslist = db.ItemsList.OrderByDescending(tbl => tbl.name);
+    //var tbl_join=from a in itemscategories join b in itemslist on a.id equals b.id_category join c in subcategories on 
+}
+
+    <div class="wrap_main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-mega">
+                    <div class="menu_mega">
+                        <div class="title_menu">
+                            <span class="title_">Danh mục sản phẩm</span>
+                            <span class="nav_button"><span><i class="fa fa-bars" aria-hidden="true"></i></span></span>
+                        </div>
+                        <div class="list_menu_header menu_all_site col-lg-3 col-md-3 hidden-sm hidden-xs">
+                            <ul class="ul_menu site-nav-vetical">
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/best-seller" title="BEST SELLER">
+                                        BEST SELLER
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                    <ul class="ul_content_right_1 row">
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/top-10-ssd" title="TOP SSD">TOP SSD</a></li>
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/top-10-usb" title="Top USB">Top USB</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/top-10-ssd" title="Top SSD">Top SSD</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/top-10-microsd" title="Top microSD">Top microSD</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/top-o-cung-di-dong" title="Top ổ cứng di động">Top ổ cứng di động</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/the-class-10-u3" title="Thẻ nhớ Class 10 U3">Thẻ nhớ Class 10 U3</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+                                @foreach (var item in itemscategories)
+                                {
+                                    <li class="nav_item lv1 li_check">
+                                        <a target="_blank" href="/Product/Category/@item.id" title="@item.name">
+                                            @item.name
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+
+                                        @*<ul class="ul_content_right_1 row">
+                                            
+                                            @foreach (var item_sub in subcategories)
+                                            {
+                                                <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                                    <a target="_blank" href="https://www.memoryzone.com.vn/micro-sd" title="@if (item_sub.id_categories==item.id) {<text>@item_sub.name_sub</text>}">
+                                                        @if (item_sub.id_categories == item.id)
+                                                        {<text>@item_sub.name_sub</text>}
+                                                    </a>
+
+                                                    <ul class="ul_content_right_2">
+                                                        @foreach (var _itemslist in itemslist.Take(4).ToList())
+                                                        {
+                                                        <li class="nav_item lv3">
+                                                            <a target="_blank" href="https://www.memoryzone.com.vn/microsd-16gb" title="@if (_itemslist.id_subcategories == item_sub.id && item_sub.id_categories==item.id)
+                                                                {<text>@_itemslist.id</text>}">
+                                                                @if (_itemslist.id_subcategories == item_sub.id && item_sub.id_categories == item.id)
+                                                                {<text>@_itemslist.name</text>}
+                                                            </a>
+                                                        </li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                        </ul>*@
+                                    </li>
+                                }
+
+
+
+
+
+                                @*<li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/usb" title="USB">
+                                        USB
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG USB">DUNG LƯỢNG USB</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-8gb" title="USB 8GB">USB 8GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-16gb" title="USB 16GB">USB 16GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-32gb" title="USB 32GB">USB 32GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-64gb" title="USB 64GB">USB 64GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-128gb" title="USB 128GB">USB 128GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-256gb" title="USB 256GB">USB 256GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-512gb" title="USB 512GB">USB 512GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-1tb" title="USB 1TB">USB 1TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU USB">THƯƠNG HIỆU USB</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-sandisk" title="USB SANDISK">USB SANDISK</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-samsung" title="USB SAMSUNG">USB SAMSUNG</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-kingston" title="USB KINGSTON">USB KINGSTON</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-lexar" title="USB LEXAR">USB LEXAR</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-corsair" title="USB CORSAIR">USB CORSAIR</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="CHUẨN USB">CHUẨN USB</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-3-0" title="USB  3.0">USB  3.0</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-3-1" title="USB 3.1">USB 3.1</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/usb-otg" title="USB OTG">USB OTG</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-otg-type-c" title="OTG Type-C">OTG Type-C</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-otg-lightning" title="OTG Lighting iPhone/iPad">OTG Lighting iPhone/iPad</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/otg-micro" title="OTG MicroUSB">OTG MicroUSB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/ssd" title="SSD">
+                                        SSD
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG">DUNG LƯỢNG</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-120gb-ssd-128gb" title="SSD 120GB – 128GB">SSD 120GB – 128GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-240gb-ssd-256gb" title="SSD 240GB – 250GB – 256GB">SSD 240GB – 250GB – 256GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-480gb-ssd-512gb" title="SSD 480GB – 500GB – 512GB">SSD 480GB – 500GB – 512GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-1tb" title="SSD 960GB – 1TB">SSD 960GB – 1TB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-2tb" title="SSD 2TB – 4TB">SSD 2TB – 4TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU">THƯƠNG HIỆU</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-adata" title="SSD Adata">SSD Adata</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-plextor" title="SSD Plextor">SSD Plextor</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-samsung" title="SSD Samsung">SSD Samsung</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-sandisk" title="SSD Sandisk">SSD Sandisk</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-kingston" title="SSD Kingston">SSD Kingston</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-intel" title="SSD Intel">SSD Intel</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-crucial" title="SSD Crucial">SSD Crucial</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-seagate" title="SSD Seagate">SSD Seagate</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-western-digital" title="SSD Western Digital">SSD Western Digital</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="CHUẨN SSD">CHUẨN SSD</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/#" title="1.8 inche">1.8 inche</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-2-5-inche" title="2.5 inche (Chuẩn phổ thông)">2.5 inche (Chuẩn phổ thông)</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-m-2-sata" title="M.2 SATA">M.2 SATA</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-m-2-pcie" title="M.2 PCie">M.2 PCie</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-msata" title="mSATA">mSATA</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-msata-mini" title="mSATA mini">mSATA mini</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-intel-optane" title="SSD Intel Optane">SSD Intel Optane</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-server-enterprise" title="SSD SERVER (Enterprise / NAS)">SSD SERVER (Enterprise / NAS)</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-macbook" title="SSD Macbook">SSD Macbook</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/" title="RAM MÁY TÍNH">
+                                        RAM MÁY TÍNH
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="RAM LAPTOP">RAM LAPTOP</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-ddr3-for-laptop" title="Ram DDR3 For Laptop">Ram DDR3 For Laptop</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-ddr4-for-laptop" title="Ram DDR4 For Laptop">Ram DDR4 For Laptop</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="RAM DESKTOP">RAM DESKTOP</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-ddr3-for-desktop" title="Ram DDR3 For Desktop">Ram DDR3 For Desktop</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-ddr4-for-desktop" title="Ram DDR4 For Desktop">Ram DDR4 For Desktop</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG RAM">DUNG LƯỢNG RAM</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-4gb" title="4GB RAM">4GB RAM</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-8gb" title="8GB RAM">8GB RAM</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-16gb" title="16GB RAM">16GB RAM</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-32gb" title="32GB RAM">32GB RAM</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-64gb" title="64GB RAM">64GB RAM</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="BUS RAM">BUS RAM</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-1333mhz" title="BUS 1333MHz">BUS 1333MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-1600mhz" title="BUS 1600MHz">BUS 1600MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-2133mhz" title="BUS 2133MHz">BUS 2133MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-2400mhz" title="BUS 2400MHz">BUS 2400MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-2666mhz" title="BUS 2666MHz">BUS 2666MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-3000mhz" title="BUS 3000MHz">BUS 3000MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-3200mhz" title="BUS 3200MHz">BUS 3200MHz</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bus-3600mhz" title="BUS 3600MHz">BUS 3600MHz</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/ram-server" title="RAM SERVER">RAM SERVER</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong" title="Ổ CỨNG DI ĐỘNG">
+                                        Ổ CỨNG DI ĐỘNG
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG Ổ CỨNG DĐ">DUNG LƯỢNG Ổ CỨNG DĐ</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-500gb" title="Ổ cứng di động 500GB">Ổ cứng di động 500GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-1tb" title="Ổ cứng di động 1TB">Ổ cứng di động 1TB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-2tb" title="Ổ cứng di động 2TB">Ổ cứng di động 2TB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-3tb" title="Ổ cứng di động 3TB">Ổ cứng di động 3TB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-4tb" title="Ổ cứng di động 4TB – 8TB">Ổ cứng di động 4TB – 8TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU Ổ CỨNG DĐ">THƯƠNG HIỆU Ổ CỨNG DĐ</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-western" title="WESTERN DIGITAL">WESTERN DIGITAL</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-toshiba" title="TOSHIBA">TOSHIBA</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-adata" title="ADATA">ADATA</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-lacie" title="LACIE">LACIE</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-seagate" title="SEAGATE">SEAGATE</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-silicon-power" title="SILICON POWER">SILICON POWER</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-di-dong-transcend" title="TRANSCEND">TRANSCEND</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/phu-kien-o-cung-di-dong" title="Phụ kiện ổ cứng di động">Phụ kiện ổ cứng di động</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong" title="Ổ CỨNG SSD DI ĐỘNG">
+                                        Ổ CỨNG SSD DI ĐỘNG
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG SSD DĐ">DUNG LƯỢNG SSD DĐ</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong-240-256gb" title="SSD DĐ 240 → 256GB">SSD DĐ 240 → 256GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong-480-512gb" title="SSD DĐ 480 → 512GB">SSD DĐ 480 → 512GB</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong-960gb-1tb" title="SSD DĐ 960GB → 2TB">SSD DĐ 960GB → 2TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU SSD DĐ">THƯƠNG HIỆU SSD DĐ</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-di-dong-samsung-1" title="SSD DĐ SAMSUNG">SSD DĐ SAMSUNG</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-di-dong-western" title="SSD DĐ WESTERN DIGITAL">SSD DĐ WESTERN DIGITAL</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-di-dong-toshiba" title="SSD DĐ TOSHIBA">SSD DĐ TOSHIBA</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-di-dong-sandisk" title="SSD DĐ SANDISK">SSD DĐ SANDISK</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-dd-hikvision" title="SSD DĐ HIKVISION">SSD DĐ HIKVISION</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/camera-hanh-trinh" title="CAMERA HÀNH TRÌNH">
+                                        CAMERA HÀNH TRÌNH
+                                    </a>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/hdd" title="HDD">
+                                        HDD
+                                    </a>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/o-cung-desktop-cloud" title="Ổ CỨNG DESKTOP/ CLOUD">
+                                        Ổ CỨNG DESKTOP/ CLOUD
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/my-cloud-home" title="Ổ cứng Cloud">Ổ cứng Cloud</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/mybook-3-5-inch" title="Ổ cứng Desktop 3.5 inch">Ổ cứng Desktop 3.5 inch</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/#" title="PHỤ KIỆN">
+                                        PHỤ KIỆN
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/phu-kien-di-dong" title="PHỤ KIỆN ĐIỆN THOẠI">PHỤ KIỆN ĐIỆN THOẠI</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/sac" title="SẠC (Power adapter)">SẠC (Power adapter)</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/cap-sac-truyen-du-lieu" title="CÁP SẠC, TRUYỀN DỮ LIỆU">CÁP SẠC, TRUYỀN DỮ LIỆU</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/tai-nghe-dien-thoai" title="TAI NGHE ĐIỆN THOẠI">TAI NGHE ĐIỆN THOẠI</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/bluetooth" title="BLUETOOTH">BLUETOOTH</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/phu-kien-pc-laptop" title="PHỤ KIỆN PC - LAPTOP">PHỤ KIỆN PC - LAPTOP</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/dung-cu-thao-rap-may-tinh" title="Dụng cụ tháo lắp máy tính">Dụng cụ tháo lắp máy tính</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/hub-usb-3-0-usb-2-0" title="Hub USB( Bộ chia cổng USB )">Hub USB( Bộ chia cổng USB )</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/cap-ket-noi" title="Cáp kết nối">Cáp kết nối</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/box-hdd-ssd" title="Box HDD, SSD">Box HDD, SSD</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/caddy-bay-chuyen-doi" title="Caddy Bay chuyển đổi">Caddy Bay chuyển đổi</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/software" title="ANTI VIRUS">ANTI VIRUS</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/" title="APPLE SOLUTION">
+                                        APPLE SOLUTION
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="MACBOOK">MACBOOK</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/the-mo-rong" title="THẺ MỞ RỘNG">THẺ MỞ RỘNG</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/ssd-macbook" title="SSD Macbook">SSD Macbook</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/hdd-thunderbolt" title="HDD Thunderbolt">HDD Thunderbolt</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3">
+
+                                            <a target="_blank" href="https://www.memoryzone.com.vn/#" title="Phụ kiện iPhone">Phụ kiện iPhone</a>
+
+                                            <ul class="ul_content_right_2">
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/usb-otg-lightning" title="OTG Lightning">OTG Lightning</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/phu-kien-di-dong" title="Phụ kiện di động">Phụ kiện di động</a></li>
+
+                                                <li class="nav_item lv3"><a target="_blank" href="https://www.memoryzone.com.vn/hub-phu-kien-mac" title="Hub / Phụ kiện MAC">Hub / Phụ kiện MAC</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                                <li class="nav_item lv1 li_check">
+                                    <a target="_blank" href="https://www.memoryzone.com.vn/software" title="SOFTWARE">
+                                        SOFTWARE
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+
+                                    <ul class="ul_content_right_1 row">
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/internet-security" title="Internet Security">Internet Security</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/basic-antivirus" title="Basic AntiVirus">Basic AntiVirus</a></li>
+
+
+
+                                        <li class="nav_item lv2 col-lg-3 col-md-3"><a target="_blank" href="https://www.memoryzone.com.vn/mobile-sercurity" title="Mobile Security">Mobile Security</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+
+
+                            </ul>
+                        </div>
+                        <div class="list_menu_header_show hidden-lg hidden-md">
+                            <ul class="mobile-menu">
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/best-seller" title="BEST SELLER">
+                                        BEST SELLER
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/top-10-ssd" title="TOP SSD"><i class="fa fa-caret-right"></i> TOP SSD</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/top-10-usb" title="Top USB"><i class="fa fa-caret-right"></i> Top USB</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/top-10-ssd" title="Top SSD"><i class="fa fa-caret-right"></i> Top SSD</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/top-10-microsd" title="Top microSD"><i class="fa fa-caret-right"></i> Top microSD</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/top-o-cung-di-dong" title="Top ổ cứng di động"><i class="fa fa-caret-right"></i> Top ổ cứng di động</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/the-class-10-u3" title="Thẻ nhớ Class 10 U3"><i class="fa fa-caret-right"></i> Thẻ nhớ Class 10 U3</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/#" title="THẺ NHỚ">
+                                        THẺ NHỚ
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/micro-sd" title="MicroSD"><i class="fa fa-caret-right"></i> MicroSD</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/microsd-16gb" title="MicroSD 16GB">MicroSD 16GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/microsd-32gb" title="MicroSD 32GB">MicroSD 32GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/microsd-64gb" title="MicroSD 64GB">MicroSD 64GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/microsd-128gb" title="MicroSD 128GB">MicroSD 128GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/microsd-200gb-512gb" title="MicroSD 200 - 256GB">MicroSD 200 - 256GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/microsd-512gb-1tb" title="MicroSD 400GB - 1TB">MicroSD 400GB - 1TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/sd-card" title="SD Card"><i class="fa fa-caret-right"></i> SD Card</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-16gb" title="SD 16GB">SD 16GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-32gb" title="SD 32GB">SD 32GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-64gb" title="SD 64GB">SD 64GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-128gb" title="SD 128GB">SD 128GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-256gb" title="SD 256GB">SD 256GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-512gb" title="SD 512GB">SD 512GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sd-accessories" title="SD Accessories">SD Accessories</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/compact-flash-cf" title="Compact flash (CF)"><i class="fa fa-caret-right"></i> Compact flash (CF)</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cf-16gb" title="CF 16GB">CF 16GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cf-32gb" title="CF 32GB">CF 32GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cf-64gb" title="CF 64GB">CF 64GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cf-128gb" title="CF 128GB">CF 128GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cf-256gb" title="CF 256GB">CF 256GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cfast" title="CFast">CFast</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cf-accessories" title="CF Accessories">CF Accessories</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="Thương hiệu thẻ nhớ"><i class="fa fa-caret-right"></i> Thương hiệu thẻ nhớ</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/the-nho-sandisk" title="Thẻ nhớ SanDisk">Thẻ nhớ SanDisk</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/the-nho-samsung" title="Thẻ nhớ Samsung">Thẻ nhớ Samsung</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/the-nho-toshiba" title="Thẻ nhớ Toshiba">Thẻ nhớ Toshiba</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/the-nho-kingston" title="Thẻ nhớ Kingston">Thẻ nhớ Kingston</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/the-nho-lexar" title="Thẻ nhớ Lexar">Thẻ nhớ Lexar</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/dau-doc-the-nho" title="Đầu Đọc Thẻ Nhớ"><i class="fa fa-caret-right"></i> Đầu Đọc Thẻ Nhớ</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/dau-doc-the-nho-2-0" title="Đầu Đọc Thẻ Nhớ 2.0">Đầu Đọc Thẻ Nhớ 2.0</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/dau-doc-the-nho-3-0" title="Đầu Đọc Thẻ Nhớ 3.0">Đầu Đọc Thẻ Nhớ 3.0</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/sd-wifi-nfc" title="SD Wifi / NFC"><i class="fa fa-caret-right"></i> SD Wifi / NFC</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/memory-stick-pro-duo" title="Thẻ Nhớ XQD"><i class="fa fa-caret-right"></i> Thẻ Nhớ XQD</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/the-nho-macbook" title="Thẻ nhớ Macbook"><i class="fa fa-caret-right"></i> Thẻ nhớ Macbook</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/usb" title="USB">
+                                        USB
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG USB"><i class="fa fa-caret-right"></i> DUNG LƯỢNG USB</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-8gb" title="USB 8GB">USB 8GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-16gb" title="USB 16GB">USB 16GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-32gb" title="USB 32GB">USB 32GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-64gb" title="USB 64GB">USB 64GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-128gb" title="USB 128GB">USB 128GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-256gb" title="USB 256GB">USB 256GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-512gb" title="USB 512GB">USB 512GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-1tb" title="USB 1TB">USB 1TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU USB"><i class="fa fa-caret-right"></i> THƯƠNG HIỆU USB</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-sandisk" title="USB SANDISK">USB SANDISK</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-samsung" title="USB SAMSUNG">USB SAMSUNG</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-kingston" title="USB KINGSTON">USB KINGSTON</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-lexar" title="USB LEXAR">USB LEXAR</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-corsair" title="USB CORSAIR">USB CORSAIR</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="CHUẨN USB"><i class="fa fa-caret-right"></i> CHUẨN USB</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-3-0" title="USB  3.0">USB  3.0</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-3-1" title="USB 3.1">USB 3.1</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/usb-otg" title="USB OTG"><i class="fa fa-caret-right"></i> USB OTG</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-otg-type-c" title="OTG Type-C">OTG Type-C</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-otg-lightning" title="OTG Lighting iPhone/iPad">OTG Lighting iPhone/iPad</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/otg-micro" title="OTG MicroUSB">OTG MicroUSB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/ssd" title="SSD">
+                                        SSD
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG"><i class="fa fa-caret-right"></i> DUNG LƯỢNG</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-120gb-ssd-128gb" title="SSD 120GB – 128GB">SSD 120GB – 128GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-240gb-ssd-256gb" title="SSD 240GB – 250GB – 256GB">SSD 240GB – 250GB – 256GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-480gb-ssd-512gb" title="SSD 480GB – 500GB – 512GB">SSD 480GB – 500GB – 512GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-1tb" title="SSD 960GB – 1TB">SSD 960GB – 1TB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-2tb" title="SSD 2TB – 4TB">SSD 2TB – 4TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU"><i class="fa fa-caret-right"></i> THƯƠNG HIỆU</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-adata" title="SSD Adata">SSD Adata</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-plextor" title="SSD Plextor">SSD Plextor</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-samsung" title="SSD Samsung">SSD Samsung</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-sandisk" title="SSD Sandisk">SSD Sandisk</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-kingston" title="SSD Kingston">SSD Kingston</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-intel" title="SSD Intel">SSD Intel</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-crucial" title="SSD Crucial">SSD Crucial</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-seagate" title="SSD Seagate">SSD Seagate</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-western-digital" title="SSD Western Digital">SSD Western Digital</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="CHUẨN SSD"><i class="fa fa-caret-right"></i> CHUẨN SSD</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/#" title="1.8 inche">1.8 inche</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-2-5-inche" title="2.5 inche (Chuẩn phổ thông)">2.5 inche (Chuẩn phổ thông)</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-m-2-sata" title="M.2 SATA">M.2 SATA</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-m-2-pcie" title="M.2 PCie">M.2 PCie</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-msata" title="mSATA">mSATA</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-msata-mini" title="mSATA mini">mSATA mini</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/ssd-intel-optane" title="SSD Intel Optane"><i class="fa fa-caret-right"></i> SSD Intel Optane</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/ssd-server-enterprise" title="SSD SERVER (Enterprise / NAS)"><i class="fa fa-caret-right"></i> SSD SERVER (Enterprise / NAS)</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/ssd-macbook" title="SSD Macbook"><i class="fa fa-caret-right"></i> SSD Macbook</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/" title="RAM MÁY TÍNH">
+                                        RAM MÁY TÍNH
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="RAM LAPTOP"><i class="fa fa-caret-right"></i> RAM LAPTOP</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-ddr3-for-laptop" title="Ram DDR3 For Laptop">Ram DDR3 For Laptop</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-ddr4-for-laptop" title="Ram DDR4 For Laptop">Ram DDR4 For Laptop</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="RAM DESKTOP"><i class="fa fa-caret-right"></i> RAM DESKTOP</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-ddr3-for-desktop" title="Ram DDR3 For Desktop">Ram DDR3 For Desktop</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-ddr4-for-desktop" title="Ram DDR4 For Desktop">Ram DDR4 For Desktop</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG RAM"><i class="fa fa-caret-right"></i> DUNG LƯỢNG RAM</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-4gb" title="4GB RAM">4GB RAM</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-8gb" title="8GB RAM">8GB RAM</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-16gb" title="16GB RAM">16GB RAM</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-32gb" title="32GB RAM">32GB RAM</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ram-64gb" title="64GB RAM">64GB RAM</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="BUS RAM"><i class="fa fa-caret-right"></i> BUS RAM</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-1333mhz" title="BUS 1333MHz">BUS 1333MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-1600mhz" title="BUS 1600MHz">BUS 1600MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-2133mhz" title="BUS 2133MHz">BUS 2133MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-2400mhz" title="BUS 2400MHz">BUS 2400MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-2666mhz" title="BUS 2666MHz">BUS 2666MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-3000mhz" title="BUS 3000MHz">BUS 3000MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-3200mhz" title="BUS 3200MHz">BUS 3200MHz</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bus-3600mhz" title="BUS 3600MHz">BUS 3600MHz</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/ram-server" title="RAM SERVER"><i class="fa fa-caret-right"></i> RAM SERVER</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/o-cung-di-dong" title="Ổ CỨNG DI ĐỘNG">
+                                        Ổ CỨNG DI ĐỘNG
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG Ổ CỨNG DĐ"><i class="fa fa-caret-right"></i> DUNG LƯỢNG Ổ CỨNG DĐ</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-500gb" title="Ổ cứng di động 500GB">Ổ cứng di động 500GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-1tb" title="Ổ cứng di động 1TB">Ổ cứng di động 1TB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-2tb" title="Ổ cứng di động 2TB">Ổ cứng di động 2TB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-3tb" title="Ổ cứng di động 3TB">Ổ cứng di động 3TB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-4tb" title="Ổ cứng di động 4TB – 8TB">Ổ cứng di động 4TB – 8TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU Ổ CỨNG DĐ"><i class="fa fa-caret-right"></i> THƯƠNG HIỆU Ổ CỨNG DĐ</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-western" title="WESTERN DIGITAL">WESTERN DIGITAL</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-toshiba" title="TOSHIBA">TOSHIBA</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-adata" title="ADATA">ADATA</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-lacie" title="LACIE">LACIE</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-seagate" title="SEAGATE">SEAGATE</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-silicon-power" title="SILICON POWER">SILICON POWER</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-di-dong-transcend" title="TRANSCEND">TRANSCEND</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/phu-kien-o-cung-di-dong" title="Phụ kiện ổ cứng di động"><i class="fa fa-caret-right"></i> Phụ kiện ổ cứng di động</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong" title="Ổ CỨNG SSD DI ĐỘNG">
+                                        Ổ CỨNG SSD DI ĐỘNG
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="DUNG LƯỢNG SSD DĐ"><i class="fa fa-caret-right"></i> DUNG LƯỢNG SSD DĐ</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong-240-256gb" title="SSD DĐ 240 → 256GB">SSD DĐ 240 → 256GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong-480-512gb" title="SSD DĐ 480 → 512GB">SSD DĐ 480 → 512GB</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/o-cung-ssd-di-dong-960gb-1tb" title="SSD DĐ 960GB → 2TB">SSD DĐ 960GB → 2TB</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="THƯƠNG HIỆU SSD DĐ"><i class="fa fa-caret-right"></i> THƯƠNG HIỆU SSD DĐ</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-di-dong-samsung-1" title="SSD DĐ SAMSUNG">SSD DĐ SAMSUNG</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-di-dong-western" title="SSD DĐ WESTERN DIGITAL">SSD DĐ WESTERN DIGITAL</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-di-dong-toshiba" title="SSD DĐ TOSHIBA">SSD DĐ TOSHIBA</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-di-dong-sandisk" title="SSD DĐ SANDISK">SSD DĐ SANDISK</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-dd-hikvision" title="SSD DĐ HIKVISION">SSD DĐ HIKVISION</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li">
+                                    <a href="https://www.memoryzone.com.vn/camera-hanh-trinh" title="CAMERA HÀNH TRÌNH">
+                                        CAMERA HÀNH TRÌNH
+                                    </a>
+                                </li>
+
+
+
+                                <li class="mb-li">
+                                    <a href="https://www.memoryzone.com.vn/hdd" title="HDD">
+                                        HDD
+                                    </a>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/o-cung-desktop-cloud" title="Ổ CỨNG DESKTOP/ CLOUD">
+                                        Ổ CỨNG DESKTOP/ CLOUD
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/my-cloud-home" title="Ổ cứng Cloud"><i class="fa fa-caret-right"></i> Ổ cứng Cloud</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/mybook-3-5-inch" title="Ổ cứng Desktop 3.5 inch"><i class="fa fa-caret-right"></i> Ổ cứng Desktop 3.5 inch</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/#" title="PHỤ KIỆN">
+                                        PHỤ KIỆN
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/phu-kien-di-dong" title="PHỤ KIỆN ĐIỆN THOẠI"><i class="fa fa-caret-right"></i> PHỤ KIỆN ĐIỆN THOẠI</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/sac" title="SẠC (Power adapter)">SẠC (Power adapter)</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cap-sac-truyen-du-lieu" title="CÁP SẠC, TRUYỀN DỮ LIỆU">CÁP SẠC, TRUYỀN DỮ LIỆU</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/tai-nghe-dien-thoai" title="TAI NGHE ĐIỆN THOẠI">TAI NGHE ĐIỆN THOẠI</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/bluetooth" title="BLUETOOTH">BLUETOOTH</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/phu-kien-pc-laptop" title="PHỤ KIỆN PC - LAPTOP"><i class="fa fa-caret-right"></i> PHỤ KIỆN PC - LAPTOP</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/dung-cu-thao-rap-may-tinh" title="Dụng cụ tháo lắp máy tính">Dụng cụ tháo lắp máy tính</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/hub-usb-3-0-usb-2-0" title="Hub USB( Bộ chia cổng USB )">Hub USB( Bộ chia cổng USB )</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/cap-ket-noi" title="Cáp kết nối">Cáp kết nối</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/box-hdd-ssd" title="Box HDD, SSD">Box HDD, SSD</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/caddy-bay-chuyen-doi" title="Caddy Bay chuyển đổi">Caddy Bay chuyển đổi</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/software" title="ANTI VIRUS"><i class="fa fa-caret-right"></i> ANTI VIRUS</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/" title="APPLE SOLUTION">
+                                        APPLE SOLUTION
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="MACBOOK"><i class="fa fa-caret-right"></i> MACBOOK</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/the-mo-rong" title="THẺ MỞ RỘNG">THẺ MỞ RỘNG</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/ssd-macbook" title="SSD Macbook">SSD Macbook</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/hdd-thunderbolt" title="HDD Thunderbolt">HDD Thunderbolt</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+
+                                            <a href="https://www.memoryzone.com.vn/#" title="Phụ kiện iPhone"><i class="fa fa-caret-right"></i> Phụ kiện iPhone</a>
+
+                                            <ul class="mb-ul3">
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/usb-otg-lightning" title="OTG Lightning">OTG Lightning</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/phu-kien-di-dong" title="Phụ kiện di động">Phụ kiện di động</a></li>
+
+                                                <li class="mb-li3"><a href="https://www.memoryzone.com.vn/hub-phu-kien-mac" title="Hub / Phụ kiện MAC">Hub / Phụ kiện MAC</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="mb-li li-has-subs">
+                                    <a href="https://www.memoryzone.com.vn/software" title="SOFTWARE">
+                                        SOFTWARE
+                                        <i class="fa fa-angle-down open-close"></i>
+                                    </a>
+
+                                    <ul class="mb-ul2 submenu">
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/internet-security" title="Internet Security"><i class="fa fa-caret-right"></i> Internet Security</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/basic-antivirus" title="Basic AntiVirus"><i class="fa fa-caret-right"></i> Basic AntiVirus</a>
+                                        </li>
+
+
+
+                                        <li class="mb-li2">
+                                            <a href="https://www.memoryzone.com.vn/mobile-sercurity" title="Mobile Security"><i class="fa fa-caret-right"></i> Mobile Security</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>*@
+
+
+                            </ul>
+                            <script>
+                                $(document).ready(function () {
+                                    $('.open-close').on('click', function (e) {
+                                        e.preventDefault();
+                                        var $this = $(this);
+                                        $this.parents('.li-has-subs').find('.submenu').stop().slideToggle();
+                                        $(this).toggleClass('active')
+                                        return false;
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 hidden-xs hidden-sm">
+                    <div class="bg-header-nav">
+                        <div>
+                            <div class="row row-noGutter-2">
+                                <nav class="header-nav">
+                                    <ul class="item_big">
+
+
+
+
+
+
+
+                                        <li class="nav-item">
+                                            <a  class="a-img" href="/Home/">
+                                                <span>TRANG CHỦ</span>
+                                                <span class="label_">
+
+                                                    <i class="label "></i>
+
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a target="_blank" class="a-img" href="#">
+                                                <span>THANH TOÁN</span>
+                                                <span class="label_">
+
+                                                    <i class="label "></i>
+
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a target="_blank" class="a-img" href="#">
+                                                <span>CHÍNH SÁCH GIAO HÀNG</span>
+                                                <span class="label_">
+
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a target="_blank" class="a-img" href="#">
+                                                <span>LIÊN HỆ</span>
+                                                <span class="label_">
+
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

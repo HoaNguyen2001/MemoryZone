@@ -1,0 +1,19 @@
+.ml-half-screen.ml-login-align-3 .ml-container .ml-extra-div,
+.ml-half-screen.ml-login-align-1 .ml-container .ml-form-container {
+    width: 66.666666666667%;
+}
+
+.ml-half-screen.ml-login-align-4 .ml-container .ml-extra-div,
+.ml-half-screen.ml-login-align-2 .ml-container .ml-form-container {
+    flex-basis: 66.666666666667%;
+}
+
+.ml-half-screen.ml-login-align-3 .ml-container .ml-form-container,
+.ml-half-screen.ml-login-align-1 .ml-container .ml-extra-div {
+    width: 33.333333333333%;
+}
+
+.ml-half-screen.ml-login-align-4 .ml-container .ml-form-container,
+.ml-half-screen.ml-login-align-2 .ml-container .ml-extra-div {
+    flex-basis: 33.333333333333%;
+}

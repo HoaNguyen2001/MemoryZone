@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_shared/_chiTiet.cshtml";
+}
+
+@* khai bao de su dung cac class trong thu muc model *@
+@using project_banhang.Models
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<ItemsList>
+@using Microsoft.AspNetCore.Http.Extensions;
+
+@if (ViewBag._query == null || ViewBag._query == "")
+{
+    <section class="bread-crumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                        <li class="home">
+                            <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                            <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </li>
+                        <li><strong>Kết quả tìm kiếm với từ khóa ""</strong></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bread-crumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Không có kết quả tìm kiếm phù hợp</h3>
+                </div>
+            </div>
+        </div>
+    </div>}
+else
+{
+    <section class="bread-crumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                        <li class="home">
+                            <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                            <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </li>
+                        <li><strong>Kết quả tìm kiếm với từ khóa "@ViewBag._query"</strong></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="signup search-main">
+        <div class="container">
+            <div class="row">
+
+
+
+                <div class="col-xs-12 margin-bottom-15">
+                    <h1 class="title-head title_search">Có @Model.Count() kết quả tìm kiếm phù hợp</h1>
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-30">
+                    <div class="products-view-gridsss products cls_search">
+                        <div class="row content_col">
+
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-lg-fix-5">
+                                    <div class="product-col">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class="product-box-h">
+                                            <div class="product-thumbnail">
+                                                <a class="image_link display_flex" href="/Product/Detail/@item.id" title="@item.name">
+                                                    <img src="~/Upload/Products/@item.media" data-lazyload="~/Upload/Products/@item.media" alt="@item.name">
+                                                </a>
+
+                                                <!-- Tag giá sốc -->
+                                                <!-- End tag giá sốc -->
+                                                <!-- Tag Mã KM -->
+                                                <!-- End Tag Mã KM -->
+                                            </div>
+                                            <div class="product-info a-left">
+                                                <h3 class="product-name"><a class="height_name text2line" href="/Product/Detail/@item.id" title="@item.name">@item.name</a></h3>
+
+                                                <div class="product-hides">
+                                                    <div class="product-hide">
+                                                        @{
+                                                            var infor = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                                        }
+
+                                                        <div class="price-box clearfix">
+                                                            @if (item.sale == true)
+                                                            {
+                                                                double newprice = item.price - item.price * item.discount / 100;
+                                                                <text><div class="special-price">
+                                                                        <span class="price product-price">@string.Format(infor, "{0:c0" + "}", newprice)</span>
+                                                                    </div>
+                                                                    <div class="old-price">
+                                                                        <span class="price product-price-old">
+                                                                            @string.Format(infor, "{0:c0" + "}", item.price)
+                                                                        </span>
+                                                                    </div></text>
+                                                            }
+                                                            else
+                                                            {
+                                                                <text><div class="old-price">
+                                                                        <span class="price product-price">
+                                                                            @string.Format(infor, "{0:c0" + "}", item.price)
+                                                                        </span>
+                                                                    </div></text>
+                                                            }
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="product-action clearfix hidden-xs">
+                                                    <form action="/Cart/Buy/@item.id" method="post" class="variants form-nut-grid" data-id="@item.id" enctype="multipart/form-data">
+                                                        @Html.AntiForgeryToken()
+                                                        <div>
+
+                                                            <input type="hidden" name="variantId" value="20443148">
+                                                            <button class="btn-buy btn-cart btn btn-circle left-to " title="Thêm vào giỏ hàng">
+                                                                <i class="fa fa-shopping-basket"></i>Mua ngay
+                                                            </button>
+
+
+                                                            <a data-toggle="tooltip" title="" href="/o-cung-mang-hdd-6tb-western-digital-cloud-home-wdbvxc0060hwt" data-handle="o-cung-mang-hdd-6tb-western-digital-cloud-home-wdbvxc0060hwt" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm hidden-md" data-original-title="Xem nhanh">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <div class="bizweb-product-reviews-badge" data-id="12489038"><div class="bizweb-product-reviews-star" data-score="5" data-number="5" title="Tuyệt vời" style="color: rgb(255, 190, 0);"><i data-alt="1" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="2" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="3" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="4" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="5" class="star-on-png" title="Tuyệt vời"></i><input name="score" type="hidden" value="5" readonly=""></div><div><p>1</p></div><div><img src="https://productreviews.sapoapps.vn//assets/images/user.png" width="18" height="17"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+}

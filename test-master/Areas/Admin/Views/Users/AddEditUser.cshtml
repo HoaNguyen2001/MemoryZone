@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "AddEditUser";
+    Layout = "~/Areas/Admin/Views/_share/_layout.cshtml";
+}
+
+
+@using project_banhang.Models
+@*dòng này dùng cũng đcược, không cũng được => khai báo kiểu dữ liệu cho Model*@
+@model users
+
+<div class="col-md-12"">
+    <div class="panel panel-primary" style="margin-top:50px;">
+        <div class="panel-heading">Add edit user</div>
+        <div class="panel-body">
+            <form method="post" action="@ViewBag.FormAction">
+                @Html.AntiForgeryToken()
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Name</div>
+                    <div class="col-md-10">
+                        <input type="text" value="@if (Model != null) {<text>@Model.name</text>}" name="name" class="form-control" required>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Email</div>
+                    <div class="col-md-10">
+                        <input type="email" value="@if (Model != null) {<text>@Model.email</text>}" name="email" class="form-control" required>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Password</div>
+                    <div class="col-md-10">
+                        <input type="password" name="password" class="form-control" @if (Model != null) { <text> placeholder="Không đổi password thì không nhập thông tin vào ô textbox này" </text>  } else { <text> required</text> } title="Không đổi password thì không nhập thông tin vào ô textbox này">
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <input type="submit" value="Xác nhận" class="btn btn-primary">
+                    </div>
+                </div>
+                <!-- end rows -->
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    form input{
+        width:100px;
+    }
+</style>
+
+
+
+

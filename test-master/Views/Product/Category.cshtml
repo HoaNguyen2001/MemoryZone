@@ -1,0 +1,594 @@
+﻿
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/_shared/_layoutDanhMuc.cshtml";
+}
+
+@* khai bao de su dung cac class trong thu muc model *@
+@using project_banhang.Models
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<ItemsList>
+@using Microsoft.AspNetCore.Http.Extensions;
+
+@{
+    //lay cac bien truyen tu url de thuc hien viet sap xep san pham - request bên ngoài view
+    string _group = Context.Request.Query["group"];
+    string _order = Context.Request.Query["order"];
+}
+
+<section class="bread-crumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <li class="home">
+                        <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                        <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    </li>
+
+
+                    <li><strong itemprop="title">@ViewBag.name.name</strong></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+        <section class="main_container collection col-lg-9 col-lg-push-3">
+
+            <div class="category-products products">
+
+                <div class="sortPagiBar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="box-heading relative">
+                                @*<h1 class="title-head margin-top-0">@</h1>*@
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 text-xs-left text-sm-right">
+                            <div class="bg-white clearfix f-right">
+                                @*<div class="view-mode">
+                                    <a href="javascript:;" data-view="list" onclick="location.href='?view=list'">
+                                        <b class="btn button-view-mode view-mode-list ">
+                                            <i class="fa fa-th-list" aria-hidden="true"></i>
+                                        </b>
+                                        <span>Danh sách</span>
+                                    </a>
+                                    <a href="javascript:;" data-view="grid" onclick="location.href='?view=grid'">
+                                        <b class="btn button-view-mode view-mode-grid active ">
+                                            <i class="fa fa-th" aria-hidden="true"></i>
+                                        </b>
+                                        <span>Lưới</span>
+                                    </a>
+                                </div>*@
+                                <div id="sort-by">
+                                    <select class="form-control" onchange="location.href='?group='+this.value;">
+                                        <option value="0">Mặc định</option>
+                                        <option value="asc">A → Z</option>
+                                        <option value="desc">Z → A</option>
+                                        <option value="priceAsc">Giá tăng dần</option>
+                                        <option value="priceDesc">Giá giảm dần</option>
+                                        <option value="productNew">Hàng mới nhất</option>
+                                        <option value="productOld">Hàng cũ nhất</option>
+                                    </select>
+                                    @*<ul>
+                                        <li>
+                                            <span class="val">Mặc định</span>
+                                            <ul class="ul_2">
+                                                <li><a href="javascript:;" onclick="sortby(&#39;default&#39;)">Mặc định</a></li>
+                                                <li><a href="javascript:;" onclick="sortby(&#39;alpha-asc&#39;)">A → Z</a></li>
+                                                <li><a href="javascript:;" onclick="sortby(&#39;alpha-desc&#39;)">Z → A</a></li>
+                                                <li><a href="javascript:;" onclick="sortby(&#39;price-asc&#39;)">Giá tăng dần</a></li>
+                                                <li><a href="javascript:;" onclick="sortby(&#39;price-desc&#39;)">Giá giảm dần</a></li>
+                                                <li><a href="javascript:;" onclick="sortby(&#39;created-desc&#39;)">Hàng mới nhất</a></li>
+                                                <li><a href="javascript:;" onclick="sortby(&#39;created-asc&#39;)">Hàng cũ nhất</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*@if (Model.Count() == 0)
+                {
+                    <section class="alert alert-warning" role="alert">Không có sản phẩm phù hợp</section>
+                }
+                else
+                {*@
+                <section class="products-view products-view-grid">
+                    <div class="row row-noGutter-75">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+
+                                <div class="product-box-h">
+                                    <div class="product-thumbnail">
+                                        <a class="image_link display_flex" href="/Product/Detail/@item.id" title="@item.name">
+                                            <img src="~/Upload/Products/@item.media" data-lazyload="~/Upload/Products/@item.media" alt="@item.name">
+                                        </a>
+
+                                        <!-- Tag giá sốc -->
+
+                                        @if (item.sale)
+                                        {
+                                            <div class="tagdacbiet_sale sale-flash">
+
+                                                <div class="font16">
+                                                    @item.discount %
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <!-- End tag giá sốc -->
+                                        <!-- Tag Mã KM -->
+                                        <!-- End Tag Mã KM -->
+                                    </div>
+                                    <div class="product-info a-left">
+                                        <h3 class="product-name"><a class="height_name text2line" href="/Product/Detail/@item.id" title="@item.name">@item.name</a></h3>
+
+                                        <div class="product-hides">
+                                            <div class="product-hide">
+                                                @{
+                                                    var infor = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                                }
+
+                                                <div class="price-box clearfix">
+                                                    @if (item.sale == true)
+                                                    {
+                                                        double newprice = item.price - item.price * item.discount / 100;
+                                                        <text><div class="special-price">
+                                                                <span class="price product-price">@string.Format(infor, "{0:c0" + "}", newprice)</span>
+                                                            </div>
+                                                            <div class="old-price">
+                                                                <span class="price product-price-old">
+                                                                    @string.Format(infor, "{0:c0" + "}", item.price)
+                                                                </span>
+                                                            </div></text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text><div class="old-price">
+                                                                <span class="price product-price">
+                                                                    @string.Format(infor, "{0:c0" + "}", item.price)
+                                                                </span>
+                                                            </div></text>
+                                                    }
+
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="product-action clearfix hidden-xs">
+                                            <form action="/Cart/Buy/@item.id" method="post" class="variants form-nut-grid" data-id="product-actions-@item.id" enctype="multipart/form-data">
+                                                @Html.AntiForgeryToken()
+                                                <div>
+
+                                                    <input type="hidden" name="variantId" value="@item.id">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <button class="btn-buy btn-cart btn btn-circle left-to " title="Thêm vào giỏ hàng">
+                                                        <i class="fa fa-shopping-basket"></i>Mua ngay
+                                                    </button>
+
+
+                                                    <a data-toggle="tooltip" title="" href="/Product/Detail/@item.id" data-handle="ssd-samsung-nvme-pm961-m-2-pcie-gen3-x4-128gb" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm hidden-md" data-original-title="Xem nhanh">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="bizweb-product-reviews-badge" data-id="12488840"><div class="bizweb-product-reviews-star" data-score="5" data-number="5" title="Tuyệt vời" style="color: rgb(255, 190, 0);"><i data-alt="1" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="2" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="3" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="4" class="star-on-png" title="Tuyệt vời"></i>&nbsp;<i data-alt="5" class="star-on-png" title="Tuyệt vời"></i><input name="score" type="hidden" value="5" readonly=""></div><div><p>5</p></div><div><img src="./danh mục_files/user.png" width="18" height="17"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="text-right">
+                        @Html.PagedListPager(Model, page => Url.Action("Category", "Product", new { page }))
+                    </div>
+
+                </section>
+                @* } *@
+
+            </div>
+        </section>
+
+        <aside class="dqdt-sidebar sidebar left left-content col-lg-3 col-lg-pull-9">
+
+
+
+
+            <div class="aside-filter">
+                <div class="filter-container">
+                    <div class="filter-container__selected-filter" style="display: none;">
+                        <div class="filter-container__selected-filter-header clearfix">
+                            <span class="filter-container__selected-filter-header-title"><i class="fa fa-arrow-left hidden-sm-up"></i> Bạn chọn</span>
+                            <a href="javascript:void(0)" onclick="clearAllFiltered()" class="filter-container__clear-all">Bỏ hết <i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <div class="filter-container__selected-filter-list">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Lọc Hãng -->
+                <aside class="aside-item filter-vendor">
+                    <div class="aside-title">
+                        <h2 class="title-head margin-top-0"><span>Thương hiệu</span></h2>
+                    </div>
+                    <div class="aside-content filter-group">
+                        <div class="field-search form-group">
+                            <input type="text" placeholder="Lọc theo thương hiệu" class="form-control filter-vendor-list" id="brand">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="search_brand">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <ul>
+
+                            @foreach (var _brand in ViewBag.brand)
+                            {
+                                <li class="filter-item filter-item--check-box filter-item--green ">
+                                    <span>
+                                        <label for="filter-@_brand.name">
+                                            <input type="checkbox" id="filter-@_brand.name" name="brand" data-group="Hãng" data-field="vendor" value="@_brand.name" data-operator="OR">
+                                            <i class="fa" id="fa"></i>
+                                            @_brand.name
+                                        </label>
+                                    </span>
+
+                                </li>
+
+                            }
+
+                        </ul>
+                    </div>
+                </aside>
+                @* script tìm kiếm thương hiệu *@
+                @*<script>
+                    document.getElementById("search_brand").addEventListener("click", function () {
+                        var _namebrand = document.getElementById("brand").value;
+                        location.href = '?brand=' + _namebrand;
+                    });
+                </script>*@
+
+
+                <!-- End lọc hãng -->
+                <!-- Lọc theo tag 2 (Nhà cung cấp) -->
+                <!-- End Lọc theo tag 2 (Nhà cung cấp) -->
+                <!-- Lọc giá -->
+
+
+                <aside class="aside-item filter-price">
+                    <div class="aside-title">
+                        <h2 class="title-head margin-top-0"><span>Giá sản phẩm</span></h2>
+                    </div>
+                    <div class="aside-content filter-group">
+                        <div id="start"><input placeholder="đ TỪ" id="bd"></div>
+                        <div id="stop"><input placeholder="đ ĐẾN" id="kt"></div>
+                        <a id="old-value"></a>
+
+
+                    </div>
+                </aside>
+                @*<script>
+                    document.getElementById("filter-value").addEventListener("click", function () {
+                        var _bd = document.getElementById("bd").value;
+                        var _kt = parseInt(document.getElementById("kt").value);
+                        if (/^[\d]+$/.test(_bd) && /^[\d]+$/.test(_kt)) {
+                            location.href = '?start=' + _bd + '&' + 'stop=' + _kt;
+                        }
+                    });
+                </script>*@
+
+
+
+                <!-- End Lọc giá -->
+                <!-- Lọc Loại -->
+                <!-- End Lọc Loại -->
+                <!-- Lọc theo Tag (Màu sắc)-->
+                <!-- End Lọc theo Tag (Màu sắc)-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @if (ViewBag.id == 13 || ViewBag.id == 10)
+                {
+                    <aside class="aside-item filter-tag-style-1 tag-filtster">
+                        <div class="aside-title">
+                            <h2 class="title-head margin-top-0"><span>CHUẨN Ổ CỨNG</span></h2>
+                        </div>
+                        <div class="aside-content filter-group">
+                            <ul>
+
+
+
+
+
+                                <li class="filter-item filter-item--check-box filter-item--green">
+                                    <span>
+                                        <label for="filter-2-5-inch">
+                                            <input type="checkbox" name="chuanocung" id="filter-2-5-inch" onchange="toggleFilter(this)" data-group="tag1" data-field="tags" data-text="2.5 inch" value="2.5 inch" data-operator="OR">
+                                            <i class="fa"></i>
+                                            2.5 inch
+                                        </label>
+                                    </span>
+                                </li>
+
+
+
+
+
+                                <li class="filter-item filter-item--check-box filter-item--green">
+                                    <span>
+                                        <label for="filter-msata">
+                                            <input type="checkbox" name="chuanocung" id="filter-msata" onchange="toggleFilter(this)" data-group="tag1" data-field="tags" data-text="mSata" value="mSata" data-operator="OR">
+                                            <i class="fa"></i>
+                                            mSata
+                                        </label>
+                                    </span>
+                                </li>
+
+
+
+
+
+                                <li class="filter-item filter-item--check-box filter-item--green">
+                                    <span>
+                                        <label for="filter-m-2-sata">
+                                            <input type="checkbox" name="chuanocung" id="filter-m-2-sata" onchange="toggleFilter(this)" data-group="tag1" data-field="tags" data-text="M.2 Sata" value="M.2 Sata" data-operator="OR">
+                                            <i class="fa"></i>
+                                            M.2 Sata
+                                        </label>
+                                    </span>
+                                </li>
+
+
+
+
+
+                                <li class="filter-item filter-item--check-box filter-item--green">
+                                    <span>
+                                        <label for="filter-pcie">
+                                            <input type="checkbox" name="chuanocung" id="filter-pcie" onchange="toggleFilter(this)" data-group="tag1" data-field="tags" data-text="PCIe" value="PCIe" data-operator="OR">
+                                            <i class="fa"></i>
+                                            PCIe
+                                        </label>
+                                    </span>
+                                </li>
+
+
+
+
+
+
+
+                            </ul>
+                        </div>
+                    </aside>
+
+
+
+                    <aside class="aside-item filter-tag-style-2 tag-filtster">
+                        <div class="aside-title">
+                            <h2 class="title-head margin-top-0"><span>DUNG LƯỢNG</span></h2>
+                        </div>
+                        <div class="aside-content filter-group">
+                            <ul>
+
+
+
+
+
+                                @if (ViewBag.id != 10)
+                                {
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-120gb-128gb">
+                                                <input type="checkbox" name="storage" id="filter-120gb-128gb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="120GB → 128GB" value="(120GB → 128GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                120GB → 128GB
+                                            </label>
+                                        </span>
+                                    </li>
+
+
+
+
+
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-240gb-256gb">
+                                                <input type="checkbox" name="storage" id="filter-240gb-256gb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="240GB → 256GB" value="(240GB → 256GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                240GB → 256GB
+                                            </label>
+                                        </span>
+                                    </li>
+
+
+
+
+
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-480gb-512gb">
+                                                <input type="checkbox" name="storage" id="filter-480gb-512gb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="480GB → 512GB" value="(480GB → 512GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                480GB → 512GB
+                                            </label>
+                                        </span>
+                                    </li>
+
+
+
+
+
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-960gb-1tb">
+                                                <input type="checkbox" name="storage" id="filter-960gb-1tb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="960GB → 1024GB" value="(960GB → 1024GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                960GB → 1TB
+                                            </label>
+                                        </span>
+                                    </li>
+                                }
+
+
+
+
+                                @if (ViewBag.id == 10)
+                                {
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-2tb-4tb">
+                                                <input type="checkbox" name="storage" id="filter-2tb-4tb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="2TB → 4TB" value="(2048GB → 4096GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                2TB → 4TB
+                                            </label>
+                                        </span>
+                                    </li>
+
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-4tb-6tb">
+                                                <input type="checkbox" name="storage" id="filter-4tb-6tb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="4TB → 6TB" value="(4096GB → 6144GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                4TB → 6TB
+                                            </label>
+                                        </span>
+                                    </li>
+
+                                    <li class="filter-item filter-item--check-box filter-item--green">
+                                        <span>
+                                            <label for="filter-6tb-10tb">
+                                                <input type="checkbox" name="storage" id="filter-6tb-10tb" onchange="toggleFilter(this)" data-group="tag2" data-field="tags" data-text="6TB → 10TB" value="(6144GB → 10240GB)" data-operator="OR">
+                                                <i class="fa"></i>
+                                                6TB → 10TB
+                                            </label>
+                                        </span>
+                                    </li>
+                                }
+
+
+
+                            </ul>
+                        </div>
+                    </aside>
+                }
+
+                <a id="filter-value" class="btn btn-primary">Áp dụng</a>
+
+
+            </div>
+
+        </aside>
+
+        @* cái này để tìm kiếm này, hihi, ra rồi *@
+        @*<input type="button" id="btn" value="test" />*@
+        <script language="javascript">
+            document.getElementById('filter-value').onclick = function () {
+                // Khai báo tham số
+                var brand = document.getElementsByName('brand');
+                var chuanocung = document.getElementsByName('chuanocung');
+                var storage = document.getElementsByName('storage');
+
+                var result = "";
+
+                // Lặp qua từng checkbox để lấy giá trị
+                for (var i = 0; i < brand.length; i++) {
+                    if (brand[i].checked === true) {
+                        result += 'brand=' + brand[i].value + '&';
+                    }
+                }
+
+                // Lặp qua từng checkbox để lấy giá trị
+                for (var i = 0; i < chuanocung.length; i++) {
+                    if (chuanocung[i].checked === true) {
+                        result += 'chuanocung=' + chuanocung[i].value + '&';
+                    }
+                }
+                 // Lặp qua từng checkbox để lấy giá trị
+                for (var i = 0; i < storage.length; i++) {
+                    if (storage[i].checked === true) {
+                        result += 'storage=' + storage[i].value + '&';
+                    }
+                }
+
+                var _bd = document.getElementById("bd").value;
+                var _kt = parseInt(document.getElementById("kt").value);
+                if (/^[\d]+$/.test(_bd) && /^[\d]+$/.test(_kt)) {result += 'start=' + _bd + '&' + 'stop=' + _kt;}
+                // In ra kết quả
+                //alert("Sở thích là: " + result);
+                window.location.href = '?' + result;
+            };
+        </script>
+
+        <div id="open-filters" class="open-filters hidden-lg">
+            <i class="fa fa-align-right"></i>
+            <span>Lọc</span>
+        </div>
+    </div>
+</div>
+
+@*<script>
+        var colName = "Ổ cứng SSD Samsung";
+
+        var colId = 1679863;
+
+    </script>*@
+<input id="collection_id" value="1679863" type="hidden">
+
+<div class="ab-most-view-product-module ab-hide"></div>
+
+<link href="./danh mục_files/bpr-products-module.css" rel="stylesheet" type="text/css">
+<div class="bizweb-product-reviews-module"></div>
+

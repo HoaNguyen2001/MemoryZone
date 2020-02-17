@@ -1,0 +1,938 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/_shared/_chiTiet.cshtml";
+}
+
+@using project_banhang.Models;
+@{
+    DataContext db = new DataContext();
+    var _itemsList = db.ItemsList.OrderByDescending(tbl => tbl.id).ToList();
+}
+
+<section class="bread-crumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <li><strong><span itemprop="title">@Model.name</span></strong></li>
+                    <li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="product margin-top-20" itemscope="" itemtype="http://schema.org/Product">
+    <meta itemprop="url" content="/Product/Detail/@Model.id">
+    <meta itemprop="name" content="@Model.name">
+    <meta itemprop="image" content="">
+    <meta itemprop="description" content="
+	@Html.Raw(Model.content)
+   ">
+    <meta itemprop="brand" content="Samsung">
+    <meta itemprop="sku" content="MZ147254">
+    <meta itemprop="mpn" content="12489065">
+
+    <div class="container">
+        <div class="row">
+            <div class="details-product">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="rows">
+                        <div class="product-detail-left product-images col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                            <div class="row">
+                                <div id="sync1" class="owl-carousel owl-theme owl-loaded owl-drag">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="owl-stage-outer">
+                                        <div class="owl-stage" style="transform: translate3d(-1089px, 0px, 0px); transition: all 0s ease 0s; width: 3993px;">
+                                            <div class="owl-item cloned" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-03.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-03.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item cloned" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-04.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-04.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item cloned" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-05.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-05.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item active" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="~/Upload/Products/@Model.media" src="~/Upload/Products/@Model.media" alt="@Model.name">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-02.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-02.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-03.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-03.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-04.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-04.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-05.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-05.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item cloned" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-01.jpg?v=1539764764717" src="./chi tiết_files/860-pro-2-5-inch-01.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item cloned" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-02.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-02.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item cloned" style="width: 363px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/100/329/122/products/860-pro-2-5-inch-03.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-03.jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="owl-nav disabled"><div class="owl-prev"><svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"></path></svg></div><div class="owl-next"><svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"></path></svg></div></div><div class="owl-dots disabled"></div>
+                                </div>
+
+                                @*<div id="sync2" class="owl-carousel owl-theme owl-loaded owl-drag">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="owl-stage-outer">
+                                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 452px;">
+                                            <div class="owl-item current active" style="width: 90.25px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/329/122/products/860-pro-2-5-inch-01.jpg?v=1539764764717" src="./chi tiết_files/860-pro-2-5-inch-01(1).jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item active" style="width: 90.25px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/329/122/products/860-pro-2-5-inch-02.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-02(1).jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item active" style="width: 90.25px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/329/122/products/860-pro-2-5-inch-03.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-03(1).jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item active" style="width: 90.25px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/329/122/products/860-pro-2-5-inch-04.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-04(1).jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div><div class="owl-item" style="width: 90.25px;">
+                                                <div class="item">
+                                                    <a href="javascript:void(0)">
+                                                        <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/329/122/products/860-pro-2-5-inch-05.jpg?v=1568096819103" src="./chi tiết_files/860-pro-2-5-inch-05(1).jpg" alt="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><div class="owl-nav"><div class="owl-prev disabled"> </div><div class="owl-next"> </div></div><div class="owl-dots disabled"></div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7 details-pro">
+                            <h1 class="title-product">@Model.name</h1>
+
+
+
+                            <div class="reviews_details_product">
+                                <div class="bizweb-product-reviews-badge" data-id="12489065"></div>
+                            </div>
+                            <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                <meta itemprop="priceValidUntil" content="2030-11-05">
+                                <link itemprop="url" href="https://www.memoryzone.com.vn/ssd-samsung-860-pro-series-256gb">
+                                <div class="group-status">
+                                    <span class="first_status">
+                                        Thương hiệu: <span class="status_name">@ViewBag.brand</span>
+                                    </span>
+                                    <span class="first_status">
+                                        &nbsp;|&nbsp; Tình trạng: <span class="status_name availabel">
+                                            <span><link itemprop="availability" href="https://schema.org/InStock">Còn hàng</span>
+
+                                            @*@{
+                                                    if (_itemsList.Count >= 1)
+                                                    {
+                                                        <span><link itemprop="availability" href="https://schema.org/InStock">Còn hàng</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span><link itemprop="availability" href="https://schema.org/InStock">Hết hàng</span>
+                                                    }
+                                                }*@
+
+
+                                        </span>
+                                    </span>
+                                </div>
+                                @{
+                                    var infor = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                }
+                                @if (Model.sale)
+                                {
+                                    var newprice = Model.price - Model.price * Model.discount / 100;
+                                    <div class="price-box clearfix">
+
+                                        <span class="special-price">
+                                            <span class="price product-price">@string.Format(infor, "{0:c0" + "}", newprice)</span>
+                                            @*<meta itemprop="price" content="2050000">
+                                                <meta itemprop="priceCurrency" content="VND">*@
+                                        </span> <!-- Giá Khuyến mại -->
+                                        <span class="old-price" itemprop="priceSpecification" itemscope="" itemtype="http://schema.org/priceSpecification">
+                                            <del class="price product-price-old">
+                                                @string.Format(infor, "{0:c0" + "}", Model.price)
+                                            </del>
+                                            @*<meta itemprop="price" content="2350000">
+                                            <meta itemprop="priceCurrency" content="VND">*@
+                                        </span> <!-- Giás gốc -->
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="price-box clearfix">
+
+                                        <span class="special-price">
+                                            <span class="price product-price">@string.Format(infor, "{0:c0" + "}", Model.price)</span>
+                                        </span> <!-- Giá Khuyến mại -->
+                                    </div>
+                                }
+                            </div>
+
+
+                            <div class="product-summary product_description margin-bottom-0">
+                                <div class="rte description  rte-summary">
+                                    @Html.Raw(Model.content)
+
+                                    <div id="eJOY__extension_root" style="all: unset;">&nbsp;</div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-product col-sm-12">
+                                <form enctype="multipart/form-data" id="add-to-cart-form" action="/Cart/Buy/@Model.id" method="post" class="form-inline margin-bottom-0">
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-sm-6 col-xs-12 no-padding">
+
+                                        <div class="box-variant clearfix ">
+
+                                            <input type="hidden" name="variantId" value="20443098">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 no-padding">
+
+                                    </div>
+                                    <div class="form-group form_button_details margin-top-5">
+                                        <div class="form_product_content ">
+                                            <div class="soluong show">
+                                                <div class="label_sl margin-bottom-10">Số lượng:</div>
+                                                <div class="custom input_number_product custom-btn-number form-control">
+                                                    <button class="btn_num num_1 button button_qty" onclick="var result = document.getElementById(&#39;qtym&#39;); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button">-</button>
+                                                    <input type="text" id="qtym" name="quantity" onkeyup="valid(this,&#39;numbers&#39;)" onkeypress="validate(event)" class="form-control prd_quantity" min="1" value="1">
+                                                    <button class="btn_num num_2 button button_qty" onclick="var result = document.getElementById(&#39;qtym&#39;); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;" type="button">+</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="button_actions clearfix">
+
+                                                <button type="submit" class="btn btn_base btn_add_cart btn-cart">
+                                                    <span class="text_1">MUA NGAY</span>
+                                                    <span class="text_2">Giao hàng miễn phí tận nơi</span>
+                                                </button>
+
+                                                <a class="btn btn_base btn_call" href="tel:(028)73013878">
+                                                    <span class="text_1">GỌI ĐẶT HÀNG</span>
+
+                                                    <span class="text_2">Vui lòng gọi ngay (028) 7301 3878</span>
+
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+                                    <style>
+                                        /* selectors without product id */
+
+                                        label[for="product-select-option-9"] {
+                                            display: none !important;
+                                        }
+
+                                        #product-select-option-9 {
+                                            display: none !important;
+                                        }
+
+                                        label[for="product-selectors-option-9"] {
+                                            display: none !important;
+                                        }
+
+                                        #product-selectors-option-9 {
+                                            display: none !important;
+                                        }
+
+                                        .id-product-select-option-9 {
+                                            display: none !important;
+                                        }
+
+
+                                        /* selectors with product id */
+
+                                        label[for="product-select-12489065-option-9"] {
+                                            display: none !important;
+                                        }
+
+                                        #product-select-12489065-option-9 {
+                                            display: none !important;
+                                        }
+
+
+                                        label[for="product-selectors-12489065-option-9"] {
+                                            display: none !important;
+                                        }
+
+                                        #product-selectors-12489065-option-9 {
+                                            display: none !important;
+                                        }
+                                    </style>
+                                    <script>
+                                        setTimeout(function () {
+                                            $("label:contains('BuyXDiscount')").css("display", "none");
+                                        }, 100)
+                                        setTimeout(function () {
+                                            $("label:contains('BuyXDiscount')").css("display", "none");
+                                        }, 200)
+                                        setTimeout(function () {
+                                            $("label:contains('BuyXDiscount')").css("display", "none");
+                                        }, 300)
+                                        setTimeout(function () {
+                                            $("label:contains('BuyXDiscount')").css("display", "none");
+                                        }, 500)
+                                        setTimeout(function () {
+                                            $("label:contains('BuyXDiscount')").css("display", "none");
+                                        }, 1000)
+                                    </script>
+                                    <div class="ab-buyx-detail-product" data-productid="12489065"></div>
+                                    <script>
+                                        if (window.app_buyxgety_view != undefined) {
+                                            window.app_buyxgety_view();
+                                        }
+                                        function addToCartApp(variantId) {
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: '/cart/add.js',
+                                                async: false,
+                                                data: { variantId: variantId, quantity: 1 },
+                                                dataType: 'json',
+                                                error: addToCartFail,
+                                                beforeSend: function () {
+                                                },
+                                                success: addToCartSuccess,
+                                                cache: false
+                                            });
+                                        }
+                                    </script>
+                                    <link href="./chi tiết_files/BuyXGetYStyle" rel="stylesheet" type="text/css" media="all">
+                                    <div class="app_buyx_promotion"></div>
+                                    <div class="abps-productdetail ab-hide" ab-data-productid="12489065"></div>
+
+                                    <div id="app-installmentsales-btn-buy" style="display:none" customer-id="0" product-id="12489065">
+                                        <input type="button" style="float:left;" onclick="installmentsalesBtnBuy();" class="app-buy-btn" value="MUA TRẢ GÓP">
+                                        <br>
+                                        <div class="app_installsale_error_message">Chỉ áp dụng thanh toán trả góp với 1 đơn vị sản phẩm</div>
+                                        <br>
+                                        <div class="app-installmentsales-box">
+                                            <span class="app-installmentsales-box-title">
+                                                Bảng tính mua hàng trả góp (Tham khảo)
+                                            </span>
+                                            <div class="app-installmentsales-full-line">
+                                                <span class="half-text-left">Giá trị sản phẩm: </span>
+                                                <span class="half-text-right app-installmentsales-variant-price">2.050.000₫</span>
+                                            </div>
+                                            <div class="app-installmentsales-full-line">
+                                                <span class="half-text-left">Chính sách trả góp: </span>
+                                                <span class="half-text-right app-installmentsales-month">
+                                                    <select>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                            <div class="app-installmentsales-full-line">
+                                                <span class="half-text-left">Mức trả trước: </span>
+                                                <span class="half-text-right prepay-money"></span>
+                                            </div>
+                                            <div class="app-installmentsales-full-line">
+                                                <span class="money-per-month-label">Số tiền cần thanh toán hàng tháng: &nbsp;</span> <b class="money-per-month"></b>
+                                            </div>
+                                        </div>
+
+                                        <select id="app-installment-product-selectors" name="app-installment-variantId" style="display:none">
+
+                                            <option variant-id="20443098" variant-price="2050000.0000">2.050.000₫</option>
+
+                                        </select>
+                                    </div>
+                                    <script>
+	window.ABInstallmentSale = window.ABInstallmentSale || {};
+	window.ABInstallmentSale.ProductId = 12489065;
+	window.ABInstallmentSale.CustomerId = 0;
+	window.ABInstallmentSale.MoneyFormat = "{{amount_no_decimals_with_comma_separator}}₫";
+                                    </script>
+                                    <style>
+
+                                        .app-installmentsales-box * {
+                                            padding: 0;
+                                            margin: 0;
+                                            text-align: left;
+                                            float: left;
+                                            border: none;
+                                        }
+
+                                        .app-installmentsales-box {
+                                            padding: 15px;
+                                            margin: 15px 0 15px 0;
+                                            text-align: left;
+                                            float: left;
+                                            border: 1px solid #ccc;
+                                            border-radius: 5px;
+                                            max-width: 435px;
+                                        }
+
+                                        .app-installmentsales-box-title {
+                                            width: 100%;
+                                            margin-bottom: 10px;
+                                            font-size: 1.5em;
+                                        }
+
+                                        .app-installmentsales-full-line {
+                                            width: 100%;
+                                            line-height: 34px;
+                                            float: left;
+                                            margin-top: 10px;
+                                        }
+
+                                        .app-installmentsales-box .half-text-left {
+                                            width: 40%;
+                                            float: left;
+                                        }
+
+                                        .app-installmentsales-box .half-text-right {
+                                            width: 60%;
+                                            float: left;
+                                        }
+
+                                        .app-installmentsales-box .money-per-month-label {
+                                            float: left;
+                                        }
+
+                                        .app-installmentsales-variant-price {
+                                            padding: 0 0 0 12px;
+                                            border: 1px solid #ccc;
+                                            color: #191515;
+                                            border-radius: 5px;
+                                            line-height: 32px;
+                                        }
+
+                                        .app-installmentsales-month {
+                                            text-align: center;
+                                            border: 1px solid #ccc;
+                                            color: #191515;
+                                            border-radius: 5px;
+                                            line-height: 32px;
+                                        }
+
+                                        .app-installmentsales-variant-price * {
+                                            color: #191515;
+                                        }
+
+                                        .app-installmentsales-month * {
+                                            color: #191515;
+                                        }
+
+                                        .app-installmentsales-box select {
+                                            padding: 0 8px;
+                                            height: 32px;
+                                            width: 100%;
+                                            border: none;
+                                            box-shadow: none;
+                                            background-color: transparent;
+                                            background-image: none;
+                                        }
+
+                                        .app-installmentsales-box .money-per-month {
+                                            color: red;
+                                        }
+
+                                        #app-installmentsales-btn-buy {
+                                            clear: both;
+                                            float: left;
+                                        }
+
+                                            #app-installmentsales-btn-buy .app-buy-btn {
+                                                padding: 10px 20px;
+                                                border: none;
+                                            }
+
+                                            #app-installmentsales-btn-buy .app_installsale_error_message {
+                                                color: red;
+                                                float: left;
+                                                display: none;
+                                                -ms-word-wrap: break-word;
+                                                word-wrap: break-word;
+                                            }
+                                    </style>
+                                </form>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="thongtinkhuyenmai">
+                                <div class="content rte rte-summary">
+
+                                    @Html.Raw(Model.note)
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="tab_h">
+
+                        <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12 no-padding">
+                            <!-- Nav tabs -->
+                            <div class="product-tab e-tabs">
+                                <ul class="tabs tabs-title clearfix">
+
+                                    <li class="tab-link current" data-tab="tab-1">
+                                        <h3><span>Mô tả sản phẩm</span></h3>
+                                    </li>
+
+
+
+                                </ul>
+
+                                <div id="tab-1" class="tab-content current">
+                                    <div class="rte">
+                                        <div class="product-well">
+                                            <div class="ba-text-fpt" id="show_test">
+                                                <span class="more-text" id="more-text">@Html.Raw(Model.description)</span>
+
+                                            </div>
+
+                                            <div class="show-more">
+                                                <a class="btn btn-default btn--view-more">
+                                                    <span class="more-text" id="more">Xem đầy đủ</span>
+                                                    <span class="less-text" id="less">Thu gọn</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript">
+                                            document.getElementById("more").addEventListener("click", function () {
+                                                document.getElementById("show_test").removeAttribute("class");
+                                                document.getElementById("more").setAttribute("class", "less-text");
+                                                document.getElementById("less").setAttribute("class", "more-text");
+                                            });
+                                            document.getElementById("less").addEventListener("click", function () {
+                                                document.getElementById("show_test").setAttribute("class", "ba-text-fpt");
+                                                document.getElementById("more").setAttribute("class", "more-text");
+                                                document.getElementById("less").setAttribute("class", "less-text");
+                                            })
+                                        </script>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+                        @* load cmt của fb *@
+                        <div class="fb-comments" data-href="http://hoanguyen-001-site1.itempurl.com/" data-width="870" data-numposts="5"></div>
+
+
+
+
+                        <div id="bizweb-product-reviews" class="bizweb-product-reviews" data-id="12489065">
+
+                            <div class="title-bl">
+                                <h3>Đánh giá sản phẩm</h3>
+                            </div>
+                            <div id="bizweb-product-reviews-sub" style="width:100%">
+                                <div class="bizweb-product-reviews-summary" id="bizweb-product-reviews-summary">
+                                    <div>
+                                        <meta itemprop="name" content="SSD Samsung 860 Pro Series 256GB MZ-76P256BW">
+                                        <div class="bpr-summary" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                                            <meta content="5" itemprop="ratingValue">
+                                            <meta content="5" itemprop="bestRating">
+                                            <meta content="1" itemprop="worstRating">
+                                            <meta content="2" itemprop="ratingCount">
+                                            <span class="bpr-summary-average">5</span>
+                                            <div id="bizweb-prv-summary-star" class="bizweb-product-reviews-star" data-score="5" data-number="5"></div>
+                                            <div class="bpr-summary-caption"></div>
+                                        </div>
+                                        <div itemprop="review" itemtype="http://schema.org/Review" itemscope="">
+                                            <div itemprop="author" itemtype="http://schema.org/Person" itemscope="">
+                                                <meta itemprop="name" content="Memoryzone - Professional in memory">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="product-reviews-summary-actions">
+                                </span>
+                                <div class="bizweb-product-reviews-form" id="bpr-form_12489065" style="display:none;">
+                                </div>
+                                <div style="display:none;" id="bpr-thanks" class="bizweb-product-reviews-form">
+                                </div>
+                                <div id="bpr-list" class="bizweb-product-reviews-list">
+                                </div>
+                                <div id="bpr-more-reviews">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 hidden-xs hidden-sm hidden-md">
+                    <div class="right_module margin-bottom-50">
+                        <div class="module_service_details">
+                            <div class="wrap_module_service">
+
+                                <div class="item_service">
+                                    <div class="wrap_item_">
+                                        <div class="content_service">
+                                            <p>Giao hàng miễn phí toàn quốc</p>
+                                            <span>cho đơn hàng giá trị từ 300.000đ trở lên</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="item_service">
+                                    <div class="wrap_item_">
+                                        <div class="content_service">
+                                            <p>Hưng Yên</p>
+                                            <span>Nhận hàng từ 6 đến 24h sau khi đặt hàng</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="item_service">
+                                    <div class="wrap_item_">
+                                        <div class="content_service">
+                                            <p>HÀ NỘI</p>
+                                            <span>Nhận hàng từ 6 đến 24h sau khi đặt hàng</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="item_service">
+                                    <div class="wrap_item_">
+                                        <div class="content_service">
+                                            <p>CÁC TỈNH THÀNH KHÁC</p>
+                                            <span>nhận hàng từ 24 đến 96h sau khi đặt hàng</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            @*<div class="module_best_sale_product">
+                                    <div class="title_module_">
+                                        <h2 class="title"><a href="https://www.memoryzone.com.vn/best-seller" title="Có thể bạn thích">Có thể bạn thích</a></h2>
+                                    </div>
+                                    <div class="sale_off_today">
+
+                                        <div class="not-dqowl wrp_list_product">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <div class="item_small">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                <div class="product-mini-item clearfix   on-sale">
+                                                    <a href="https://www.memoryzone.com.vn/ssd-samsung-860-evo-250gb-2-5-inch-sata-iii" class="product-img">
+
+
+
+
+                                                        <img src="./chi tiết_files/860-evo-2-5-inch-01-d0b3ac57-309c-4112-9430-d440ad904689.jpg" alt="SSD Samsung 860 Evo 250GB 2.5-Inch SATA III MZ-76E250BW">
+                                                    </a>
+
+                                                    <div class="product-info">
+                                                        <h3><a href="https://www.memoryzone.com.vn/ssd-samsung-860-evo-250gb-2-5-inch-sata-iii" title="SSD Samsung 860 Evo 250GB 2.5-Inch SATA III MZ-76E250BW" class="product-name text3line">SSD Samsung 860 Evo 250GB 2.5-Inch SATA III MZ-...</a></h3>
+                                                        <div class="price-box">
+
+
+
+                                                            <span class="price"><span class="price product-price">1.080.000₫</span> </span> <!-- Giá Khuyến mại -->
+
+                                                            <span class="old-price"><del class="sale-price">1.450.000₫</del> </span> <!-- Giá gốc -->
+
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-lg-12 related-product margin-top-20 xs-margin-top-0 margin-bottom-30">
+                    <div class="section_prd_feature section_base">
+                        <div class="border_bottom_title clearfix">
+                        </div>
+                        <div class="title_top_menu">
+                            <h3 class="title-head"><a href="/Product/Category/@ViewBag.id">Sản phẩm cùng loại</a></h3>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="products product_related products-view-grid-bb owl-carousel owl-theme products-view-grid not-dot2 owl-loaded owl-drag" data-dot="false" data-nav="false" data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-margin="15">
+
+                            <div class="owl-stage-outer">
+                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1896px;">
+                                    @foreach (var _sameiteam in ViewBag.list_record)
+                                    {
+                                        <div class="owl-item active" style="width: 222px; margin-right: 15px;">
+                                            <div class="item saler_item">
+                                                <div class="owl_item_product product-col-1" style="border-right: 1px solid rgb(235, 235, 235);">
+                                                    <div class="product-box-h">
+                                                        <div class="product-thumbnail">
+                                                            <a class="image_link display_flex" href="/Product/Detail/@_sameiteam.id" title="@_sameiteam.name">
+                                                                <img src="~/Upload/Products/@_sameiteam.media" data-lazyload="~/Upload/Products/@_sameiteam.media" alt="@_sameiteam.name">
+                                                            </a>
+
+                                                            <!-- Tag giá sốc -->
+                                                            @if (_sameiteam.sale)
+                                                            {
+                                                                <div class="tagdacbiet_sale sale-flash">
+
+                                                                    <div class="font16">
+                                                                        @_sameiteam.discount%
+
+                                                                    </div>
+                                                                </div>
+                                                            }
+
+                                                            <!-- End tag giá sốc -->
+                                                            <!-- Tag Mã KM -->
+                                                            <!-- End Tag Mã KM -->
+                                                        </div>
+                                                        <div class="product-info a-left">
+                                                            <h3 class="product-name"><a class="height_name text2line" href="/Product/Detail/@_sameiteam.id" title="@_sameiteam.name">@_sameiteam.name</a></h3>
+
+                                                            <div class="product-hides">
+                                                                <div class="product-hide">
+
+                                                                    @{
+
+                                                                        if (_sameiteam.sale)
+                                                                        {
+                                                                            double newprice = _sameiteam.price - _sameiteam.price * _sameiteam.discount / 100;
+                                                                            <div class="price-box clearfix">
+                                                                                <div class="special-price">
+                                                                                    <span class="price product-price">@string.Format(infor, "{0:c0" + "}", newprice)</span>
+                                                                                </div>
+
+                                                                                <div class="old-price">
+                                                                                    <span class="price product-price-old">
+                                                                                        <span class="price product-price-old">@string.Format(infor, "{0:c0" + "}", _sameiteam.price)</span>
+                                                                                    </span>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="price-box clearfix">
+                                                                                <div class="special-price">
+                                                                                    <span class="price product-price">@string.Format(infor, "{0:c0" + "}", _sameiteam.price)</span>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        }
+                                                                    }
+
+
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="product-action clearfix hidden-xs">
+                                                                <form action="/Cart/Buy/@_sameiteam.id" method="post" class="variants form-nut-grid" data-id="product-actions-15122743" enctype="multipart/form-data">
+                                                                    @Html.AntiForgeryToken()
+                                                                    <div>
+
+                                                                        <input type="hidden" name="variantId" value="@_sameiteam.id">
+                                                                        <input type="hidden" name="quantity" value="1">
+                                                                        <button class="btn-buy btn-cart btn btn-circle left-to " title="@_sameiteam.id">
+                                                                            <i class="fa fa-shopping-basket"></i>Mua ngay
+                                                                        </button>
+
+
+                                                                        <a data-toggle="tooltip" title="" href="/Product/Detail/@_sameiteam.id" data-handle="@_sameiteam.name" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm hidden-md" data-original-title="Xem nhanh">
+                                                                            <i class="fa fa-eye"></i>
+                                                                        </a>
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                            <div class="bizweb-product-reviews-badge" data-id="15122743"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div><div class="owl-nav"><div class="owl-prev disabled"> </div><div class="owl-next"> </div></div><div class="owl-dots"><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+

@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Areas/Admin/Views/_share/_layout.cshtml";
+}
+
+@* khai bao de su dung cac class trong thu muc model *@
+@using project_banhang.Models
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<ItemsList>
+@* thao tac voi csdl *@
+@using System.Linq
+@*thao tac voi file*@
+@using System.IO
+
+<article class="content items-list-page">
+    <div class="title-search-block">
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 class="title">
+                        Items <a href="/Admin/ItemsList/Add" class="btn btn-primary btn-sm rounded-s"> Add New </a>
+                        <!--
+                    -->
+                        <div class="action dropdown">
+                            <button class="btn  btn-sm rounded-s btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> More actions... </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a class="dropdown-item" href="https://modularcode.io/modular-admin-html/items-list.html#"><i class="fa fa-pencil-square-o icon"></i>Mark as a draft</a>
+                                <a class="dropdown-item" href="https://modularcode.io/modular-admin-html/items-list.html#" data-toggle="modal" data-target="#confirm-modal"><i class="fa fa-close icon"></i>Delete</a>
+                            </div>
+                        </div>
+                    </h3>
+                    <p class="title-description"> List of sample items - e.g. books, movies, events, etc... </p>
+                </div>
+                <div class="col-md-7">
+                    <div class="items-search">
+                        <form class="form-inline">
+                            <div class="input-group ">
+                                <input type="text" class="form-control boxed rounded-l " placeholder="Search for..." style="height:33px">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary rounded-s" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="sort-by" class="col-sm-2">
+                    <select class="form-control" onchange="location.href='?group='+this.value;">
+                        <option value="0">Mặc định</option>
+                        <option value="asc">A → Z</option>
+                        <option value="desc">Z → A</option>
+                        <option value="priceAsc">Giá tăng dần</option>
+                        <option value="priceDesc">Giá giảm dần</option>
+                        <option value="productNew">Hàng mới nhất</option>
+                        <option value="productOld">Hàng cũ nhất</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card items">
+            <ul class="item-list striped">
+                <li class="item item-list-header">
+                    <div class="item-row">
+                        <div class="item-col fixed item-col-check">
+                            <label class="item-check" id="select-all-items">
+                                <input type="checkbox" class="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="item-col item-col-header fixed item-col-img md">
+                            <div>
+                                <span>Media</span>
+                            </div>
+                        </div>
+                        <div class="item-col item-col-header item-col-title">
+                            <div>
+                                <span>Name</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header item-col-category">
+                            <div class="no-overflow">
+                                <span>Thương hiệu</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header item-col-category">
+                            <div class="no-overflow">
+                                <span>Category</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header item-price">
+                            <div class="no-overflow">
+                                <span>Price</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header item-price">
+                            <div>
+                                <span>Discount (%)</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header item-col-sales">
+                            <div>
+                                <span>Sale</span>
+                            </div>
+                        </div>
+
+
+                        <div class="item-col item-col-header item-col-check">
+                            <div>
+                                <span>Hot</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header item-col-date">
+                            <div>
+                                <span>Published</span>
+                            </div>
+                        </div>
+
+                        <div class="item-col item-col-header fixed item-col-actions-dropdown">
+                        </div>
+                        <div class="item-col fixed item-col-actions-dropdown">
+                            <div class="item-actions-dropdown">
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @foreach (var item in Model)
+                {
+                    <li class="item item-list-header">
+                        <div class="item-row">
+
+                            <div class="item-col fixed item-col-check">
+                                <label class="item-check" id="select-all-items">
+                                    <input type="checkbox" class="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+
+                            <div class="item-col item-col-header fixed item-col-img md">
+                                <div>
+                                    <span>
+                                        @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\Products\\" + @item.media))
+                                        {
+                                            <img src="~/Upload/Products/@item.media" style="max-height:50px;max-width:50px;" />
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item-col item-col-header item-col-title">
+                                <div>
+                                    <span>@item.name</span>
+                                </div>
+                            </div>
+
+                            <div class="item-col item-col-header item-col-category">
+                                <div class="no-overflow">
+                                    <span>
+                                        @{ DataContext db = new DataContext();
+                                            var _brand = db.brand.Where(tbl => tbl.id == item.id_brand).FirstOrDefault();
+                                            if (_brand != null)
+                                            { <text>@_brand.name</text>}
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item-col item-col-header item-col-category">
+                                <div class="no-overflow">
+                                    <span>
+                                        @{
+
+                                            var category = db.ItemsCategories.Where(tbl => tbl.id == item.id_category).FirstOrDefault();
+                                            if (category != null)
+                                            { <text>@category.name</text>}
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+
+                            @*<div class="item-col item-col-header item-col-category">
+                                <div class="no-overflow">
+                                    <span>
+                                        @{
+                                            var sub_category = db.SubCategories.Where(tbl => tbl.id == item.id_subcategories).FirstOrDefault();
+                                            if (sub_category != null)
+                                            {<text>@sub_category.name_sub</text>}
+                                        }
+                                    </span>
+                                </div>
+                            </div>*@
+
+                            <div class="item-col item-col-header item-price">
+                                <div class="no-overflow">
+                                    <span>
+                                        @if (item.price != null)
+                                        {<text>@string.Format("{0:#,#.}", item.price)</text>}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item-col item-col-header item-price">
+                                <div>
+                                    <span>
+                                        @if (item.sale == true)
+                                        {<text>@item.discount</text>}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item-col item-col-header item-col-sales">
+                                <div>
+                                    <span>
+                                        @if (item.sale == true)
+                                        {<text><i class="fa fa-check"></i></text>}
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="item-col item-col-header item-col-check">
+                                <div>
+                                    <span>
+                                        @if (item.hot == true)
+                                        {<text><i class="fa fa-check"></i></text>}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item-col item-col-header item-col-date">
+                                <div>
+                                    <span>
+                                        @item.published
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                            <div class="item-col fixed item-col-actions-dropdown">
+                                <div class="item-actions-dropdown">
+                                    <a class="item-actions-toggle-btn">
+                                        <span class="inactive">
+                                            <i class="fa fa-cog"></i>
+                                        </span>
+                                        <span class="active">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                        </span>
+                                    </a>
+                                    <div class="item-actions-block">
+                                        <ul class="item-actions-list">
+                                            <li>
+                                                <a class="remove" href="/Admin/ItemsList/Delete?id=@item.id" onclick="return window.confirm('Are you sure?');">
+                                                    <i class="fa fa-trash-o "></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="edit" href="/Admin/ItemsList/Edit?id=@item.id">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                @Html.PagedListPager(Model, page => Url.Action("List", "ItemsList", new { page }))
+            </ul>
+        </div>
+        @*<nav class="text-right">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> Prev </a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> 1 </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> 2 </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> 3 </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> 4 </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> 5 </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="https://modularcode.io/modular-admin-html/items-list.html"> Next </a>
+                </li>
+            </ul>
+        </nav>*@
+</article>
+

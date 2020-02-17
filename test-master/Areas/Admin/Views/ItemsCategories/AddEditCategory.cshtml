@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "AddEditCategory";
+    Layout = "~/Areas/Admin/Views/_share/_layout.cshtml";
+}
+@*@*khai báo để sử dụng các class trong models*@
+@using project_banhang.Models
+@*khai báo kiểu dữ liệu của models*@
+@using System.Text;
+
+
+<article class="content item-editor-page">
+    <div class="title-block">
+        <h3 class="title">
+            Add new item <span class="sparkline bar" data-type="bar"></span>
+        </h3>
+    </div>
+    <form name="item" method="post" action="@ViewBag.FormAction" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div class="card card-block">
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right">Tên danh mục: </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control boxed" placeholder="" name="name" value="@if (Model != null) {<text>@Model.name</text>}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Ảnh đại diện: </label>
+                <div class="col-sm-10">
+                    <input type="file" name="thumnails">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right">Show Home: </label>
+                <div class="col-sm-10">
+                    <input type="checkbox" name="showhome" id="showhome">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Hot: </label>
+                <div class="col-sm-10">
+                    <input type="checkbox" name="hot" id="hot">
+                </div>
+            </div>
+
+            @*<div class="form-group row">
+            <label class="col-sm-2 form-control-label text-xs-right"> Hot: </label>
+            <div class="col-sm-10">
+                <input type="checkbox" @if (Model != null && Model.hot == true) { <text> checked</text> } name="hot" id="hot">
+            </div>
+        </div>*@
+            @*<div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Content: </label>
+                <div class="col-sm-10">
+                    <textarea name="content" id="content">@if(Model!=null){<text>@Model.content</text>}</textarea>
+                    <script language="javascript">
+                        CKEDITOR.replace("content");
+                    </script>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Category: </label>
+                <div class="col-sm-10">
+                    <select name="category_id" class="form-control" style="width: 300px;">
+                        @{
+                            //khoi tao doi tuong de truy van csdl
+                            DataContext db = new DataContext();
+                            var category = db.ItemsCategories.OrderByDescending(tbl => tbl.id).ToList();
+                        }
+                        @foreach (var item in category)
+                        {
+                            <option @if (Model != null && item.id == Model.id) { <text> selected</text> } value="@item.id">@item.name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Images: </label>
+                <div class="col-sm-10">
+                    @*foreach (var medias in Model)
+                        {
+                            <div class="images-container">
+                                <div class="image-container">
+                                    <div class="controls">
+                                        <a href="" class="control-btn move">
+                                            <i class="fa fa-arrows"></i>
+                                        </a>
+
+
+                                        <a href="" class="control-btn star">
+                                            <i class="fa"></i>
+                                        </a>
+
+
+                                        <a href="#" class="control-btn remove" data-toggle="modal" data-target="#confirm-modal">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                    <div class="image">@medias.media</div>
+                                </div>
+
+                            </div>}
+        </div>*@
+            <div class="form-group row">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary"> Submit </button>
+                </div>
+            </div>
+        </div>
+</form>
+</article>
+
+

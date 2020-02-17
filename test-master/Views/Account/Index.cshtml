@@ -1,0 +1,257 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_shared/_chiTiet.cshtml";
+}
+
+@* su dung session thi phai using doi tuong nay *@
+@using Microsoft.AspNetCore.Http;
+@using project_banhang.Models;
+
+@* neu session email ton tai thi hien thi dong duoi *@
+@if (Context.Session.GetString("customer_email") != null || Context.Session.GetString("customer_email") != " ")
+{
+    <section class="bread-crumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                        <li class="home">
+                            <a itemprop="url" href="/Home/"><span itemprop="title">Trang chủ</span></a>
+                            <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </li>
+
+                        <li><strong itemprop="title">Trang khách hàng</strong></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="signup page_customer_account">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-main-acount">
+                    <div id="parent" class="row">
+                        <div id="a" class="col-xs-12 col-sm-12 col-lg-9 col-left-account">
+                            <div class="page-title m992">
+                                <h1 class="title-head margin-top-0"><a href="#">Trang khách hàng</a></h1>
+                            </div>
+                            <div class="form-signup name-account m992">
+                                @{
+                                    DataContext db = new DataContext();
+                                    var users = db.customers.OrderByDescending(tbl => tbl.id).ToList();
+                                }
+                                <p>
+                                    <strong>
+                                        Xin chào, <a href="/account/addresses" style="color:#008744;">
+                                            @{
+                                                if (Context.Session.GetString("customer_email") != null)
+                                                {
+                                                    foreach (var item in users)
+                                                    {
+                                                        if (Context.Session.GetString("customer_email") == item.email)
+                                                        {
+                                                            @item.name
+                                                        }
+                                                    }
+                                                }
+
+                                            }
+                                        </a>&nbsp;!
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
+
+                                <div class="my-account">
+                                    <div class="dashboard">
+
+                                        <div class="recent-orders">
+                                            <div class="table-responsive tab-all" style="overflow-x:auto;">
+                                                <table class="table table-cart" id="my-orders-table">
+                                                    <thead class="thead-default">
+                                                        <tr>
+                                                            <th>Đơn hàng</th>
+                                                            <th>Ngày</th>
+
+                                                            <th>Địa chỉ</th>
+                                                            <th>Giá trị đơn hàng</th>
+                                                            <th>Tình trạng thanh toán</th>
+                                                            <th>Trạng thái</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    @*<tbody>
+
+                                                            <tr>
+                                                                <td colspan="6"><p>Không có đơn hàng nào.</p></td>
+                                                            </tr>
+
+                                                        </tbody>*@
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <thead class="card-body">
+                                                            <tr>
+                                                                <th>#@item.id HL</th>
+                                                                <th>@item.created</th>
+                                                                <th>@item.address</th>
+                                                                @{
+                                                                    var infor = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                                                }
+                                                                <th>@string.Format(infor, "{0:c0" + "}", item.price)</th>
+                                                                <th>@item.status_payment</th>
+                                                                <th>
+                                                                    @if (item.status == false)
+                                                                    {
+                                                                        <text>Đang giao hàng</text>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <text>Đã nhận hàng</text>
+                                                                    }
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                    }
+
+
+                                                </table>
+
+                                            </div>
+
+                                            <div class="paginate-pages pull-right page-account text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="b" class="col-xs-12 col-sm-12 col-lg-3 col-right-account margin-top-20">
+                            <div class="block-account">
+                                <div class="block-title-account"><h5>Tài khoản của tôi</h5></div>
+                                <div class="block-content form-signup">
+                                    @foreach (var item in users)
+                                    {
+                                        if (item.id == ViewBag.user)
+                                        {
+                                            <p><i class="fa fa-mobile font-some" aria-hidden="true"></i> <span>Điện thoại: </span> @item.phone</p>
+                                            <p><i class="fa fa-map-marker font-some" aria-hidden="true"></i> <span> Địa chỉ: @item.address</span></p>
+
+                                            <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Thành phố: @item.city</span></p>
+                                            <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Quốc gia: @item.country</span></p>
+
+                                        }
+                                    }
+                                    @*<p><i class="fa fa-mobile font-some" aria-hidden="true"></i> <span>Điện thoại: </span> @ViewBag.user.phone</p>
+                                        <p><i class="fa fa-map-marker font-some" aria-hidden="true"></i> <span> Địa chỉ: @ViewBag.user.address</span></p>
+
+                                        <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Thành phố: @ViewBag.user.city</span></p>
+                                        <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Quốc gia: @ViewBag.user.country</span></p>*@
+
+                                    <p style="margin-top:20px;"><a href="/Account/Addresses" class="btn btn-full btn-primary">Sổ địa chỉ</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+
+else
+    {
+        <section class="bread-crumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <li class="home">
+                                <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                                <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                            </li>
+
+                            <li><strong itemprop="title">Đăng nhập tài khoản</strong></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container margin-bottom-20">
+            <h1 class="title-head"><span>Đăng nhập tài khoản</span></h1>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-login">
+                        <div id="login">
+                            <span>
+                                Nếu bạn đã có tài khoản, đăng nhập tại đây.
+                            </span>
+                            <form accept-charset="UTF-8" action="/Account/LoginPost" id="customer_login" method="post">
+                                @Html.AntiForgeryToken()
+                                <input name="FormType" type="hidden" value="customer_login">
+                                <input name="utf8" type="hidden" value="true">
+                                <div class="form-signup">
+
+                                </div>
+                                <div class="form-signup clearfix">
+                                    <fieldset class="form-group">
+                                        <label>Email <span class="required">*</span></label>
+                                        <input type="email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,63}$" class="form-control form-control-lg" value="" name="email" id="customer_email" placeholder="Email" required="">
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label>Mật khẩu <span class="required">*</span></label>
+                                        <input type="password" class="form-control form-control-lg" value="" name="password" id="customer_password" placeholder="Mật khẩu" required="">
+                                    </fieldset>
+
+
+
+                                    <div class="pull-xs-left" style="margin-top: 25px;">
+                                        <input class="btn btn-style btn-primary" type="submit" value="Đăng nhập">
+                                        <a href="/Account/Register" class="btn-link-style btn-register" style="margin-left: 20px;text-decoration: underline; ">Đăng ký</a>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div style="margin-top: 5px;" id="social_login_widget"><div id="social_login" style="width: 280px; height: 120px;"><iframe id="sa_iframe" width="280" height="120" style="border:none;" src="https://sociallogin.sapoapps.vn/sociallogin/block_login?store=memoryzone-com-vn.mysapo.net"></iframe></div></div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-6 h_recover">
+
+                    <div id="recover-password" class="form-signup page-login">
+                        <span>
+                            Bạn quên mật khẩu? Nhập địa chỉ email để lấy lại mật khẩu qua email.
+                        </span>
+                        <form accept-charset="UTF-8" action="/account/recover" id="recover_customer_password" method="post">
+                            <input name="FormType" type="hidden" value="recover_customer_password">
+                            <input name="utf8" type="hidden" value="true">
+                            <div class="form-signup" style="color: red;">
+
+                            </div>
+                            <div class="form-signup clearfix">
+                                <fieldset class="form-group">
+                                    <label>Email <span class="required">*</span></label>
+                                    <input type="email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,63}$" class="form-control form-control-lg" value="" name="Email" id="recover-email" placeholder="Email" required="">
+                                </fieldset>
+                            </div>
+                            <div class="action_bottom">
+                                <input class="btn btn-style btn-primary" style="margin-top: 28px;" type="submit" value="Lấy lại mật khẩu">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+}

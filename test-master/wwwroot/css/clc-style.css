@@ -1,0 +1,72 @@
+.ml-container .ml-extra-div {
+    background-image: url(../images/4432291_Cover_RAMMSI.png);
+    background-color: rgba(247, 247, 247, 1);
+}
+
+.login h1 a {
+    background-image: url('../images/favicon.png');
+    background-size: 195px;
+    width: 200px;
+    height: 200px;
+}
+
+.login.clc-text-logo h1 a {
+    color: rgba(51, 51, 51, 1);
+    font-size: 30px;
+}
+
+.login.clc-text-logo h1 a:hover {
+    color: #00a0d2;
+}
+
+.ml-container #login {
+    max-width: 430px;
+}
+
+#loginform,
+#registerform,
+#lostpasswordform {
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 10px 24px 26px 24px;
+    border: none;
+    border-radius: unset;
+    box-shadow: none;
+}
+
+.login form .input,
+.login input[type="text"] {
+    border-radius: unset;
+    border: 1px solid #ddd;
+    background: #fbfbfb;
+}
+
+#login>#nav,
+#login>#backtoblog {
+    display: none;
+}
+
+.wp-core-ui .button-primary.focus,
+.wp-core-ui .button-primary.hover,
+.wp-core-ui .button-primary:focus,
+.wp-core-ui .button-primary:hover {
+    background: rgb(6, 119, 23, 1);
+    border-color: rgba(128, 128, 128, 1);
+}
+
+.wp-core-ui .button-primary {
+    background: rgb(6, 119, 23, 1);
+    border-color: rgba(181, 181, 181, 1);
+    box-shadow: 0 1px 0 #006799;
+    text-shadow: none;
+}
+
+.login #backtoblog a:hover,
+.login #nav a:hover,
+.login h1 a:hover {
+    color: rgb(6, 119, 23, 1);
+}
+
+#login form .forgetmenot {
+    display: none;
+}

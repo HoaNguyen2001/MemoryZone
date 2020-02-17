@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "editConfiguration";
+    Layout = "~/Areas/Admin/Views/_share/_layout.cshtml";
+}
+
+@*@*khai báo để sử dụng các class trong models*@
+@using project_banhang.Models
+@*khai báo kiểu dữ liệu của models*@
+@using System.Text;
+
+
+<article class="content item-editor-page">
+    <div class="title-block">
+        <h3 class="title">
+            Add new item <span class="sparkline bar" data-type="bar"></span>
+        </h3>
+    </div>
+    <form name="item" method="post" action="@ViewBag.FormAction" enctype="multipart/form-data">
+        @* thiếu enctype="multipart/form-data" là không nhập được ảnh *@
+        @Html.AntiForgeryToken()
+        <div class="card card-block">
+            <!--row-->
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Tên sản phẩm: </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control boxed" placeholder="Tên sản phẩm" name="name" value="@if (Model != null) {<text>@ViewBag.nameProduct.name</text>}" readonly>
+                </div>
+            </div>
+            <!--row-->
+            <!--end row-->
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right"> Thương hiệu: </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control boxed" placeholder="Thương hiệu" name="brand" value="@if (Model != null) {<text>@Model.brand</text>}">
+                </div>
+            </div>
+            <!--end row-->
+            <!--row-->
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-right">Dung lượng:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control boxed" placeholder="Dung lượng" name="storage" value="@if (Model != null) {<text>@Model.storage</text>}">
+                </div>
+            </div>
+            <!--end row-->
+            <!--row-->
+            <div class="form-group row">
+                <div class="form-group row">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary"> Submit </button>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+
+        </div>
+    </form>
+</article>
+

@@ -1,0 +1,270 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_shared/_layoutDanhMuc.cshtml";
+}
+
+<title>Giỏ hàng</title>
+
+<section class="bread-crumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <li class="home">
+                        <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                        <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    </li>
+
+                    <li><strong itemprop="title">Giỏ hàng</strong></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (ViewBag.Count!=0 && ViewBag._cart != null)
+{
+    <section class="main-cart-page main-container col1-layout">
+        <div class="main container hidden-xs">
+            <div class="header-cart">
+                <div class="title-cart">
+                    <h1>Giỏ hàng</h1>
+                </div>
+                <div class="header-cart title_cart_pc hidden-sm hidden-xs">
+
+                </div>
+            </div>
+            <div class="col-main cart_desktop_page cart-page">
+                <div class="cart page_cart hidden-xs">
+                    <div class="app_buyx_msg_cart"></div>
+                    <form action="/Cart/Checkout" method="post" novalidate="" class="margin-bottom-0">
+                        @Html.AntiForgeryToken()
+                        <div class="bg-scroll">
+                            <div class="cart-thead">
+                                <div style="width: 17%">Ảnh sản phẩm</div>
+                                <div style="width: 33%"><span class="nobr">Tên sản phẩm</span></div>
+                                <div style="width: 15%" class="a-center"><span class="nobr">Đơn giá</span></div>
+                                <div style="width: 14%" class="a-center">Số lượng</div>
+                                <div style="width: 15%" class="a-center">Thành tiền</div>
+                                <div style="width: 6%">Xoá</div>
+                            </div>
+                            @foreach (var item in ViewBag._cart)
+                            {
+                                @*@item.quantity
+                @item.ItemsList.name*@
+                                <div class="cart-tbody">
+                                    <div class="item-cart productid-@item.ItemsList.id">
+                                        <div style="width: 17%" class="image">
+                                            <a class="product-image" title="@item.ItemsList.name" href="/Product/Detail/@item.ItemsList.id">
+                                                <img width="75" height="auto" alt="@item.ItemsList.name" src="~/Upload/Products/@item.ItemsList.media">
+                                            </a>
+                                        </div>
+                                        <div style="width: 33%" class="a-center prd_name">
+                                            <h2 class="product-name"><a class="text2line" href="/Product/Detail/@item.ItemsList.id">@item.ItemsList.name</a></h2>
+                                            <span class="variant-title" style="display: none;"></span>
+                                        </div>
+                                        <div style="width: 15%" class="a-center">
+                                            <span class="item-price">
+                                                <span class="price">
+                                                    @string.Format("{0:0,00.00} ₫", item.ItemsList.price)
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div style="width: 14%" class="a-center">
+                                            <div class="input_qty_pr">
+                                                <input class="variantID" type="hidden" name="variantId" value="@item.ItemsList.id">
+                                                <button id="down_@item.ItemsList.id" onclick="var result = document.getElementById('qtyItem_@item.ItemsList.id'); var qtyItem_@item.ItemsList.id=result.value; if (!isNaN(qtyItem_@item.ItemsList.id) && qtyItem_@item.ItemsList.id > 1) result.value--; return false;" class="reduced_pop items-count btn-minus" type="button">-</button> @*disabled=""*@
+                                                <input type="text" maxlength="12" min="1" class="input-text number-sidebar input_pop input_pop qtyItem_@item.ItemsList.id" id="qtyItem_@item.ItemsList.id" name="Lines" size="4" value="@item.quantity">
+                                                <button id="up_@item.ItemsList.id" onclick="var result = document.getElementById('qtyItem_@item.ItemsList.id'); var qtyItem_@item.ItemsList.id=result.value; if (!isNaN(qtyItem_@item.ItemsList.id)) result.value++; return false;" class="increase_pop items-count btn-plus" type="button">+</button>
+                                            </div>
+                                        </div>
+                                        <div style="width: 15%" class="a-center">
+                                            <span class="cart-price">
+                                                <span class="price" id="price_@item.ItemsList.id">
+                                                    @string.Format("{0:0,00.00} ₫", item.ItemsList.price*item.quantity)
+                                                    <script>
+                                                        document.getElementById('up_@item.ItemsList.id').addEventListener('click', function () {
+                                                            var result = parseInt(document.getElementById('qtyItem_@item.ItemsList.id').value);
+                                                            
+                                                            document.getElementById('price_@item.ItemsList.id').innerHTML =(@item.ItemsList.price* result).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+" ₫";
+                                                        })
+                                                        document.getElementById('down_@item.ItemsList.id').addEventListener('click', function () {
+                                                            var result = parseInt(document.getElementById('qtyItem_@item.ItemsList.id').value);
+                                                            if (result == 1) {
+                                                                document.getElementById('price_@item.ItemsList.id').innerHTML =(@item.ItemsList.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+" ₫";
+                                                            }
+                                                            else {
+                                                                document.getElementById('price_@item.ItemsList.id').innerHTML=(@item.ItemsList.price* result-@item.ItemsList.price).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,')+" ₫";
+                                                            }
+                                                        })
+                                                    </script>
+                                                </span>
+                                            </span>
+                                        </div><div style="width: 6%">
+                                            <a class="button remove-item remove-item-cart" title="Xóa" href="/Cart/Remove/@item.ItemsList.id" data-id="@item.ItemsList.id">
+                                                <span><i class="fa fa-times" aria-hidden="true"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </form>
+                    <div class="cart-collaterals cart_submit row">
+                        <div class="totals col-sm-12 col-md-12 col-xs-12">
+                            <div class="totals">
+                                <div class="inner">
+                                    <table class="table shopping-cart-table-total margin-bottom-0" id="shopping-cart-totals-table">
+                                        <colgroup><col><col></colgroup>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="19" class="a-right"><span>Tổng tiền:</span></td>
+                                                <td colspan="2" class="a-right">
+                                                    <strong>
+                                                        <span class="totals_price price" id="totals_price">
+                                                            @*@{
+                                                                double totals = 0;
+                                                                foreach (var item in ViewBag._cart)
+                                                                {
+                                                                    totals += item.quantity * item.ItemsList.price;
+                                                                }
+                                                                @string.Format("{0:0,00.00} ₫", totals)
+                                                            }*@
+                                                            @foreach (var item in ViewBag._cart)
+        {
+            <script>
+                var total = 0;
+                total = document.getElementById("price_@item.ItemsList.id").value;
+                //document.getElementById("totals_price").innerHTML = (total).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,') +" ₫";
+                alert(document.getElementById("price_@item.ItemsList.id").value)
+            </script>
+        }
+                                                        </span>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <ul class="checkout">
+                                        <li class="clearfix f-right">
+                                            <button class="btn btn-white f-left" title="Tiếp tục mua hàng" type="button" onclick="window.location.href='/Home'"><span>Tiếp tục mua hàng</span></button>
+                                            <button class="btn btn-primary button btn-proceed-checkout f-right" title="Thực hiện thanh toán" type="button" onclick="window.location.href='/Cart/Checkout'"><span>Thực hiện thanh toán</span></button>
+
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        @*<div class="cart-mobile hidden-md hidden-lg hidden-sm">
+                <div class="app_buyx_msg_cart"></div>
+                <form action="/Cart" method="post" novalidate="" class="margin-bottom-0">
+            @Html.AntiForgeryToken()
+                    <div class="header-cart" style="background:#fff;">
+
+                <div class="title-cart title_cart_mobile">
+                    <h3>Giỏ hàng của bạn</h3>
+                </div>
+
+            </div>
+
+                    <div class="header-cart-content" style="background:#fff;">
+                        @foreach (var item in ViewBag._cart)
+                        {
+                            <div class="cart_page_mobile content-product-list">
+
+                                <div class="item-product item productid-28019722 ">
+                                    <div class="item-product-cart-mobile">
+                                        <a href="/ram-pc-crucial-ddr4-8gb-bus-3200mhz-udimm-ct8g4dfs832a">    </a>
+                                        <a class="product-images1" href="" title="@item">
+                                            <img width="80" height="150" src="" alt="Ram PC Crucial 8GB 3200Mhz DDR4 CT8G4DFS832A">
+                                        </a>
+                                    </div>
+                                    <div class="title-product-cart-mobile">
+                                        <h3><a href="#" title="@item"></a></h3>
+                                        <p>Giá: <span>890.000₫</span></p>
+                                    </div>
+                                    <div class="select-item-qty-mobile">
+                                        <div class="txt_center">
+                                            <input class="variantID" type="hidden" name="variantId" value="28019722">
+                                            <button onclick="var result = document.getElementById('qtyMobile28019722'); var qtyMobile28019722 = result.value; if( !isNaN( qtyMobile28019722 ) &amp;&amp; qtyMobile28019722 > 1 ) result.value--;return false;" class="reduced items-count btn-minus" type="button">–</button>
+                                            <input type="text" maxlength="12" min="1" class="input-text number-sidebar qtyMobile28019722" id="qtyMobile28019722" name="Lines" size="4" value="1">
+                                            <button onclick="var result = document.getElementById('qtyMobile28019722'); var qtyMobile28019722 = result.value; if( !isNaN( qtyMobile28019722 )) result.value++;return false;" class="increase items-count btn-plus" type="button">+</button>
+                                        </div><a class="button remove-item remove-item-cart" href="javascript:;" data-id="28019722">Xoá</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                        <div class="header-cart-price" style="">
+                            <div class="title-cart "><h3 class="text-xs-left">Tổng tiền</h3><a class="text-xs-right pull-right totals_price_mobile">xxx ₫</a></div>
+                            <div class="checkout">
+                                <button class="btn-proceed-checkout-mobile" title="Tiến hành thanh toán" type="button" onclick="window.location.href='/checkout'"><span>Tiến hành thanh toán</span></button>
+                                <button class="btn btn-white f-left" title="Tiếp tục mua hàng" type="button" onclick="window.location.href='/Home/'"><span>Tiếp tục mua hàng</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>*@
+    </section>
+
+    @*<script>
+            function down() {
+                var result = document.getElementById('qtyItem_@item.ItemsList.id').value; if (!isNaN(result) && result > 1) result--; return false;
+            }
+
+            function up() {
+                var result = document.getElementById('qtyItem_@item.ItemsList.id').value; if (!isNaN(result)) result; return false;
+            }
+        </script>*@
+}
+else
+{
+    <section class="main-cart-page main-container col1-layout">
+        <div class="main container hidden-xs">
+            <div class="header-cart">
+                <div class="title-cart">
+                    <h1>Giỏ hàng</h1>
+                </div>
+                <div class="header-cart title_cart_pc hidden-sm hidden-xs"><p class="hidden-xs-down">Không có sản phẩm nào. Quay lại <a href="/" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p></div>
+            </div>
+            <div class="col-main cart_desktop_page cart-page"></div>
+        </div>
+        <div class="cart-mobile hidden-md hidden-lg hidden-sm">
+            <div class="app_buyx_msg_cart"></div>
+            <form action="/cart" method="post" novalidate="" class="margin-bottom-0">
+                @Html.AntiForgeryToken()
+                <div class="header-cart" style="background:#fff;">
+
+                    <div class="title-cart title_cart_mobile">
+                        <h3>Giỏ hàng của bạn</h3>
+                    </div>
+
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+    </section>
+}
+

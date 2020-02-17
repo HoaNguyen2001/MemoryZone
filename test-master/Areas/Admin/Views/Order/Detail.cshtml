@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/_share/_layout.cshtml";
+}
+
+@* khai bao de su dung cac class trong thu muc model *@
+@using project_banhang.Models
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<order_detail>
+@* thao tac voi csdl *@
+@using System.Linq
+@{
+    DataContext db = new DataContext();
+
+    var infor = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+<article class="content responsive-tables-page">
+    <section class="section">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <ul class="item-list striped">
+                        <li class="item item-list-header">
+                            <div class="item-row">
+
+                                <div class="item-col item-col-header item-name">
+                                    <div class="no-overflow">
+                                        <span>Tên sản phẩm</span>
+                                    </div>
+                                </div>
+
+                                <div class="item-col item-col-header product-single-quantity">
+                                    <div class="no-overflow">
+                                        <span>Số lượng</span>
+                                    </div>
+                                </div>
+
+                                <div class="item-col item-col-header item-price">
+                                    <div class="no-overflow">
+                                        <span>Đơn giá</span>
+                                    </div>
+                                </div>
+
+                                <div class="item-col item-col-header fixed item-col-actions-dropdown">
+                                </div>
+                                @*<div class="item-col fixed item-col-actions-dropdown">
+                    <div class="item-actions-dropdown">
+
+                    </div>
+                </div>*@
+                            </div>
+                        </li>
+
+                        @foreach (var item in Model)
+                        {
+                            <li class="item item-list-header">
+                                <div class="item-row">
+
+                                    <div class="item-col item-col-header item-name">
+                                        <div class="no-overflow">
+                                            <span>
+                                                <a href="/Product/Detail/@item.id_items" style="text-decoration:none">
+                                                    @{
+                                                        int _id = item.id_items;
+                                                        <text>@db.ItemsList.Where(tbl => tbl.id == _id).FirstOrDefault().name</text>
+                                                    }
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="item-col item-col-header address">
+                                        <div class="no-overflow">
+                                            <span>@item.quantity</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="item-col item-col-header item-price">
+                                        <div class="no-overflow">
+                                            <span>@string.Format(infor, "{0:c0" + "}", item.price)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                                    @*<div class="item-col fixed item-col-actions-dropdown">
+                        <div class="item-actions-dropdown">
+                            <a class="item-actions-toggle-btn">
+                                <span class="inactive">
+                                    <i class="fa fa-cog"></i>
+                                </span>
+                                <span class="active">
+                                    <i class="fa fa-chevron-circle-right"></i>
+                                </span>
+                            </a>
+                            <div class="item-actions-block">
+                                <ul class="item-actions-list">
+                                    <li>
+                                        <a class="remove" href="/Admin/Order/Delete?id=" onclick="return window.confirm('Are you sure?');" title="Hủy đơn hàng">
+                                            <i class="fa fa-trash-o "></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="edit" href="/Admin/Order/Detail?id=@item.id" title="Chi tiết đơn hàng">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>*@
+                                </div>
+                            </li>
+                        }
+                        @Html.PagedListPager(Model, page => Url.Action("Index", "order", new { page }))
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+
