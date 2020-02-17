@@ -1,0 +1,447 @@
+﻿
+@{
+    Layout = null;
+}
+
+@* su dung session thi phai using doi tuong nay *@
+@using Microsoft.AspNetCore.Http;
+@using project_banhang.Models
+@{
+    //khai bao doi tuong thao tac csdl
+    DataContext db = new DataContext();
+}
+@* su dung session thi phai using doi tuong nay *@
+@using Microsoft.AspNetCore.Http;
+
+<div class="topbar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-7 hidden-sm hidden-xs">
+                <ul class="topbar_left hidden-sm hidden-xs">
+                    <li>
+                        <a class="welcome_text"></a>
+                    </li>
+                    <li>
+                        <a>Mở cửa: 9h đến 20h, chủ nhật 10h đến 16h</a>
+                    </li>
+                </ul>
+            </div>
+            @if (Context.Session.GetString("customer_email") == null)
+            {
+                <div class="col-lg-6 col-md-5 col-sm-12 d-list col-xs-12 a-right topbar_right">
+                    <div class="list-inline a-center f-right">
+                        <ul>
+                            <li class="login_content">
+                                <a class="hidden-lg click_account"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                                <a href="/Account/Login" class="hidden-xs hidden-sm hidden-md"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                                <ul class="ul_account">
+                                    <li><a href="/Account/Login/">Đăng nhập</a></li>
+                                    <li><a href="/Account/Register/">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                            <li class="hidden-xs">
+
+                                <a href="#" title="Khuyến mãi hot" class="account_a">
+                                    <i class="fa fa-star" aria-hidden="true"></i> Khuyến mãi hot
+                                </a>
+
+                            </li>
+                            <li class="hidden-xs">
+
+                                <a href="#" title="Hệ thống cửa hàng" class="account_a">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> Hệ thống cửa hàng
+                                </a>
+
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6 col-md-5 col-sm-12 d-list col-xs-12 a-right topbar_right">
+                    <div class="list-inline a-center f-right">
+                        <ul>
+                            <li class="login_content">
+                                <a class="hidden-lg click_account"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                                <a href="/Account/" class="hidden-xs hidden-sm hidden-md"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                                <ul class="ul_account">
+                                    <li><a href="/Account/">Tài khoản</a></li>
+                                    <li><a href="/Account/Logout">Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                            <li class="hidden-xs">
+
+                                <a href="#" title="Khuyến mãi hot" class="account_a">
+                                    <i class="fa fa-star" aria-hidden="true"></i> Khuyến mãi hot
+                                </a>
+
+                            </li>
+                            <li class="hidden-xs">
+
+                                <a href="#" title="Hệ thống cửa hàng" class="account_a">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> Hệ thống cửa hàng
+                                </a>
+
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<div class="mid-header wid_100 f-left">
+    <div class="container">
+        <div class="row">
+            <div class="content_header">
+                <div class="header-main">
+                    <div class="menu-bar-h nav-mobile-button hidden-md hidden-lg">
+                        <a href="/Home/#nav-mobile"><img src="~/Memory-Home/images/i_menubar.png" alt="menu bar"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="logo">
+
+
+                            <a href="/Home/" class="logo-wrapper ">
+                                <img src="~/Memory-Home/images/logo.png" data-lazyload="//bizweb.dktcdn.net/100/329/122/themes/681013/assets/logo.png?1574878515674" alt="logo ">
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+                        <div class="header-left">
+                            <div class="header_search">
+                                <form action="/Search/" method="get" class="input-group search-bar" role="search">
+
+                                    <input type="text" name="query" value="" autocomplete="off" placeholder="Sản phẩm bạn muốn tìm..." class="input-group-field auto-search">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn icon-fallback-text">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                </form>
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 no-padding-left">
+                        <div class="header-right">
+                            <div class="hotline_dathang hidden-sm">
+                                <div class="icon_hotline">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="content_hotline">
+
+                                    <a href="tel:(028)73013878">(037) 849 1006 </a>
+
+                                    <span>DĐ: <span style="color:#ffba00"><b> 0909 305 350</b></span></span>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            @{
+                                //khai bao gio hang de su dung o day
+                                Cart ShoppingCart = new Cart();
+                                //cac phan tu trong gio hang
+                                List<Item> _cart = ShoppingCart.GetCart(Context.Session);
+                                int _numberItem = 0;
+                                if (_cart != null)
+                                {
+                                    //so luong cac phan tu
+                                    _numberItem = _cart.Count();
+                                }
+                            }
+
+
+
+                            <div class="top-cart-contain f-right">
+                                <div class="mini-cart text-xs-center">
+                                    <div class="heading-cart cart_header">
+                                        <a href="/Cart/" title="Giỏ hàng">
+                                            <div class="icon_hotline">
+                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                            </div>
+                                        </a>
+                                        <div class="content_cart_header">
+                                            <a class="bg_cart" href="/Cart/" title="Giỏ hàng">
+                                                (<span class="count_item count_item_pr">@_numberItem</span>) Sản phẩm
+                                                <span class="text-giohang">Giỏ hàng</span>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                    <div class="top-cart-content">
+                                        <ul id="cart-sidebar" class="mini-products-list count_li">
+
+                                            @if (_numberItem == 0)
+                                            {
+                                                <div class="no-item">
+                                                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="item">
+                                                    <ul id="cart-sidebar" class="mini-products-list count_li">
+                                                        <ul class="list-item-cart">
+                                                            @foreach (var item in _cart)
+                                                            {
+                                                                <li class="item productid-@item.ItemsList.id">
+                                                                    <div class="border_list">
+                                                                        <a class="product-image" href="/Product/Detail/@item.ItemsList.id" title="@item.ItemsList.name">
+                                                                            <img alt="@item.ItemsList.name" src="~/Upload/Products/@item.ItemsList.media" width="100">
+                                                                        </a>
+                                                                        <div class="detail-item">
+                                                                            <div class="product-details">
+                                                                                <p class="product-name"> <a class="text2line" href="/Product/Detail/@item.ItemsList.id" title="@item.ItemsList.name">@item.ItemsList.name</a></p>
+                                                                            </div>
+                                                                            <div class="product-details-bottom">
+                                                                                <span class="price">
+
+                                                                                </span>
+                                                                                <a href="/Cart/Remove/@item.ItemsList.id" data-id="@item.ItemsList.id" title="Xóa" class="remove-item-cart fa fa-times">&nbsp;</a>
+                                                                                <div class="quantity-select qty_drop_cart">
+                                                                                    <input class="variantID" type="hidden" name="variantId" value="@item.ItemsList.name">
+                                                                                    <button onclick="var result = document.getElementById('qty20602823'); var qty20602823 = result.value; if( !isNaN( qty20602823 ) &amp;&amp; qty20602823 > 1 ) result.value--;return false;" class="btn_reduced reduced items-count btn-minus" disabled="" type="button">–</button>
+                                                                                    <input type="text" maxlength="12" min="1" class="input-text number-sidebar qty20602823" id="qty20602823" name="Lines" size="4" value="1"><button onclick="var result = document.getElementById('qty20602823'); var qty20602823 = result.value; if( !isNaN( qty20602823 )) result.value++;return false;" class="btn_increase increase items-count btn-plus" type="button">+</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                        <div class="pd">
+                                                            <div class="top-subtotal">
+                                                                Tổng tiền: <span class="price">499.000₫</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pd right_ct">
+                                                            <a href="/cart/checkout" class="btn btn-primary">
+                                                                <span>Tiến hành thanh toán</span>
+                                                            </a><a href="/cart" class="btn btn-white">
+                                                                <span>Đi đến giỏ hàng</span>
+                                                            </a>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-cart-contain f-right hidden">
+                            <div class="mini-cart text-xs-center">
+                                <div class="heading-cart">
+                                    <a class="bg_cart" href="/Cart/" title="Giỏ hàng">
+                                        <i class="ion-android-cart"></i>
+                                        <span class="count_item count_item_pr">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.title_menu').click(function () {
+            $('.list_menu_header_show').toggle();
+        })
+    })
+</script>
+
+@*}
+    else
+    {
+
+            <div class="topbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7 hidden-sm hidden-xs">
+                            <ul class="topbar_left hidden-sm hidden-xs">
+                                <li>
+                                    <a class="welcome_text"></a>
+                                </li>
+                                <li>
+                                    <a>Mở cửa: 9h đến 20h, chủ nhật 10h đến 16h</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-12 d-list col-xs-12 a-right topbar_right">
+                            <div class="list-inline a-center f-right">
+                                <ul>
+                                    <li class="login_content">
+                                        <a class="hidden-lg click_account"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                                        <a href="/Account/" class="hidden-xs hidden-sm hidden-md"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                                        <ul class="ul_account">
+                                            <li><a href="/Account/">Tài khoản</a></li>
+                                            <li><a href="Account/Logout">Đăng xuất</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hidden-xs">
+
+                                        <a href="#" title="Khuyến mãi hot" class="account_a">
+                                            <i class="fa fa-star" aria-hidden="true"></i> Khuyến mãi hot
+                                        </a>
+
+                                    </li>
+                                    <li class="hidden-xs">
+
+                                        <a href="#" title="Hệ thống cửa hàng" class="account_a">
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i> Hệ thống cửa hàng
+                                        </a>
+
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mid-header wid_100 f-left">
+                <div class="container">
+                    <div class="row">
+                        <div class="content_header">
+                            <div class="header-main">
+                                <div class="menu-bar-h nav-mobile-button hidden-md hidden-lg">
+                                    <a href="/Home/#nav-mobile"><img src="~/Memory-Home/images/i_menubar.png" alt="menu bar"></a>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="logo">
+
+
+                                        <a href="/Home/" class="logo-wrapper ">
+                                            <img src="~/Memory-Home/images/logo.png" data-lazyload="//bizweb.dktcdn.net/100/329/122/themes/681013/assets/logo.png?1574878515674" alt="logo ">
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+                                    <div class="header-left">
+                                        <div class="header_search">
+                                            <form action="/Search/" method="get" class="input-group search-bar" role="search">
+
+                                                <input type="text" name="query" value="" autocomplete="off" placeholder="Sản phẩm bạn muốn tìm..." class="input-group-field auto-search">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn icon-fallback-text">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                </span>
+                                            </form>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-xs-12 no-padding-left">
+                                    <div class="header-right">
+                                        <div class="hotline_dathang hidden-sm">
+                                            <div class="icon_hotline">
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="content_hotline">
+
+                                                <a href="tel:(028)73013878">(028) 7301 3878  (10 line)</a>
+
+                                                <span>DĐ: <span style="color:#ffba00"><b> 0909 305 350</b></span></span>
+                                            </div>
+                                        </div>
+                                        <div class="top-cart-contain f-right">
+                                            <div class="mini-cart text-xs-center">
+                                                <div class="heading-cart cart_header">
+                                                    <a href="/Cart/" title="Giỏ hàng">
+                                                        <div class="icon_hotline">
+                                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                                        </div>
+                                                    </a>
+                                                    <div class="content_cart_header">
+                                                        <a class="bg_cart" href="/Cart/" title="Giỏ hàng">
+                                                            (<span class="count_item count_item_pr">0</span>) Sản phẩm
+                                                            <span class="text-giohang">Giỏ hàng</span>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <div class="top-cart-content">
+                                                    <ul id="cart-sidebar" class="mini-products-list count_li">
+                                                        <div class="no-item">
+                                                            <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="top-cart-contain f-right hidden">
+                                            <div class="mini-cart text-xs-center">
+                                                <div class="heading-cart">
+                                                    <a class="bg_cart" href="/Cart/" title="Giỏ hàng">
+                                                        <i class="ion-android-cart"></i>
+                                                        <span class="count_item count_item_pr">0</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <script>
+                $(document).ready(function () {
+                    $('.title_menu').click(function () {
+                        $('.list_menu_header_show').toggle();
+                    })
+                })
+            </script>
+    }*@
+
+
+
+
+
+
+
+
+
+
